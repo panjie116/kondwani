@@ -2,6 +2,63 @@
 
 include 'includes/conn.php';
 
+//error_reporting(0);
+session_start();
+
+
+$message='';
+if(isset($_POST['login'])){
+
+    $username =htmlentities(mysqli_escape_string($con,$_POST['username']));
+    $password = htmlentities(mysqli_escape_string($con,$_POST['password']));
+
+    $query=mysqli_query($con,"SELECT * FROM tbladmin WHERE username ='$username' AND password='$password'");
+    if(mysqli_num_rows($query) == 1){
+
+        $row=mysqli_fetch_array($query);
+
+             $dbusername=$row['username'];
+             $firstname=$row['fname'];
+             $email=$row['email'];
+             $dbpassword=$row['password'];
+             $images=$row['picture'];
+             /// aunthentication
+
+             if($dbusername == $username && $dbpassword == $password ){
+             
+
+                        $_SESSION['username']=$username;
+                        $_SESSION['email']=$email;
+
+                        $message=$_SESSION['username'];
+
+                            echo " <script type='text/javascript'>
+                                        window.location='main/dashboard.html';
+                                    </script>";
+
+                              }
+                else{
+                    $message=" <div class='alert alert-danger' role='alert'>
+                      <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                      <strong>Wrong</strong> credetials!
+                    </div>";
+
+                } 
+
+              
+
+        }
+
+        else{
+
+                 $message=" <div class='alert alert-danger' role='alert'>
+                      <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                      <strong>User</strong> not found!
+                    </div>";
+
+                }
+
+      }
 
  ?>
 
@@ -26,14 +83,8 @@ include 'includes/conn.php';
     <!-- Custom CSS -->
     <link href="main/css/style.css" rel="stylesheet">
     
-    <!-- You can change the theme colors from here -->
     <link href="css/colors/default-dark.css" id="theme" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+   
 </head>
 
 <body class="card-no-border">
@@ -53,16 +104,18 @@ include 'includes/conn.php';
         <div class="login-register" style="background-image:url(assets/images/background/login-register.jpg);">
             <div class="login-box card">
                 <div class="card-body">
-                    <form class="form-horizontal form-material" id="loginform" action="">
+                    <form class="form-horizontal form-material" id="loginform" action="index.php" method="post">
                         <h3 class="box-title m-b-20">Sign In</h3>
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="form-control" type="text" required="" placeholder="Username"> </div>
+                                <input class="form-control" name="username" type="text" required="" placeholder="username"> </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <input class="form-control" type="password" required="" placeholder="Password"> </div>
+                                <input class="form-control" name="password" type="password" required="" placeholder="password"> </div>
                         </div>
+
+                          <?php echo$message;  ?>
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <div class="checkbox checkbox-info pull-left p-t-0">
@@ -72,7 +125,7 @@ include 'includes/conn.php';
                         </div>
                         <div class="form-group text-center">
                             <div class="col-xs-12 p-b-20">
-                                <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Log In</button>
+                                <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit" name="login">Log In</button>
                             </div>
                         </div>
                        
