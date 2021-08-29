@@ -1,3 +1,14 @@
+<?php 
+include '../includes/conn.php';
+
+//error_reporting(0);
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('location:../index.php');
+} else {
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -101,15 +112,27 @@
                         <!-- Profile -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/1.jpg" alt="user" class="profile-pic" /></a>
+                                             <?php 
+                                             $user= $_SESSION['username'];
+                                                $query=mysqli_query($con,"SELECT * FROM tbladmin WHERE username = '$user' ");
+
+                                                  while($row=mysqli_fetch_array($query)){
+
+                                             ?>
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/<?php
+                                                echo htmlentities($row['picture']);?>" alt="<?php echo htmlentities($row['picture']); ?>" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated flipInY">
                                 <ul class="dropdown-user">
                                     <li>
+                                        
                                         <div class="dw-user-box">
-                                            <div class="u-img"><img src="../assets/images/users/1.jpg" alt="user"></div>
+                                            <div class="u-img"><img src="../assets/images/users/<?php
+                                                echo htmlentities($row['picture']);?>" alt="<?php echo htmlentities($row['picture']); ?>"></div>
                                             <div class="u-text">
-                                                <h4>Panji Msowoya</h4>
-                                                <p class="text-muted">Msowoya@gmail.com</p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                                <h4> <?php echo htmlentities($row['username']); ?> </h4>
+                                                <p class="text-muted"> <?php echo htmlentities($row['email']) ?> </p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+
+                                            <?php } ?>
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>
@@ -137,7 +160,16 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="user-profile"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img src="../assets/images/users/profile.png" alt="user" /><span class="hide-menu">Panjie </span></a>
+                        <?php 
+                         $user= $_SESSION['username'];
+                            $query=mysqli_query($con,"SELECT * FROM tbladmin WHERE username = '$user' ");
+
+                              while($row=mysqli_fetch_array($query)){
+
+                         ?>
+                        <li class="user-profile"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img src="../assets/images/users/<?php
+                         echo htmlentities($row['picture']);?>" alt="<?php echo htmlentities($row['picture']); ?>" /><span class="hide-menu"> <?php echo htmlentities($row['username']) ?> </span></a>
+                           <?php   } ?>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="javascript:void()">My Profile </a></li>
                                 <li><a href="javascript:void()">Account Setting</a></li>
@@ -146,7 +178,7 @@
                         </li>
                         <li class="nav-devider"></li>
                         <li class="nav-small-cap">Admin</li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark active" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="index.html">Posts </a></li>
                             </ul>
@@ -184,13 +216,9 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor">Welcome to Admin Dash</h3>
+                        <h3 class="text-themecolor">Welcome  <?php echo $_SESSION['username']; ?> </h3>
                     </div>
-                    <div class="col-md-7 align-self-center">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        </ol>
-                    </div>
+                   
                     
                 </div>
                 <!-- ============================================================== -->
@@ -203,13 +231,14 @@
                 <!-- ============================================================== -->
                 <div class="row">
                     <div class="col-lg-4">
+
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/income.png" alt="Income" /></div>
+                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
                                     <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Total Income</h6>
-                                        <h2 class="m-t-0">953,000</h2></div>
+                                        <h6 class="text-muted m-t-10 m-b-0">Total opinion</h6>
+                                        <h2 class="m-t-0">23</h2></div>
                                 </div>
                             </div>
                         </div>
@@ -218,10 +247,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/expense.png" alt="Income" /></div>
+                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
                                     <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Total Expense</h6>
-                                        <h2 class="m-t-0">236,000</h2></div>
+                                        <h6 class="text-muted m-t-10 m-b-0">Total Ads</h6>
+                                        <h2 class="m-t-0">2</h2></div>
                                 </div>
                             </div>
                         </div>
@@ -230,10 +259,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/assets.png" alt="Income" /></div>
+                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
                                     <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Total Assets</h6>
-                                        <h2 class="m-t-0">987,563</h2></div>
+                                        <h6 class="text-muted m-t-10 m-b-0">Trash</h6>
+                                        <h2 class="m-t-0">9</h2></div>
                                 </div>
                             </div>
                         </div>
@@ -300,3 +329,5 @@
 
 
 </html>
+
+<?php } ?>

@@ -28,12 +28,11 @@ if(isset($_POST['login'])){
              
 
                         $_SESSION['username']=$username;
-                        $_SESSION['email']=$email;
 
                         $message=$_SESSION['username'];
 
                             echo " <script type='text/javascript'>
-                                        window.location='main/dashboard.html';
+                                        window.location='main/dashboard.php';
                                     </script>";
 
                               }
