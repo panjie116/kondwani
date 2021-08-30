@@ -136,11 +136,11 @@ if (!isset($_SESSION['username'])) {
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
+                                    <li><a href="profile.php"><i class="ti-user"></i> My Profile</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
+                                    <li><a href="settings.php"><i class="ti-settings"></i> Account Setting</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -171,9 +171,9 @@ if (!isset($_SESSION['username'])) {
                          echo htmlentities($row['picture']);?>" alt="<?php echo htmlentities($row['picture']); ?>" /><span class="hide-menu"> <?php echo htmlentities($row['username']) ?> </span></a>
                            <?php   } ?>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="javascript:void()">My Profile </a></li>
-                                <li><a href="javascript:void()">Account Setting</a></li>
-                                <li><a href="javascript:void()">Logout</a></li>
+                                <li><a href="profile.php">My Profile </a></li>
+                                <li><a href="settings.php">Account Setting</a></li>
+                                <li><a href="logout.php">Logout</a></li>
                             </ul>
                         </li>
                         <li class="nav-devider"></li>
