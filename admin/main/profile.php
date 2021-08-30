@@ -218,7 +218,7 @@ if (!isset($_SESSION['username'])) {
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor">Welcome  <?php echo $_SESSION['username']; ?> </h3>
+                        <h3 class="text-themecolor"> My Profile</h3>
                     </div>
                    
                     
@@ -237,9 +237,16 @@ if (!isset($_SESSION['username'])) {
                     <!-- Column -->
                     <div class="col-lg-12 col-xlg-12 col-md-5">
                         <div class="card">
+                                 <?php 
+                                       $user= $_SESSION['username'];
+                                        $query=mysqli_query($con,"SELECT * FROM tbladmin WHERE username = '$user' ");
+
+                                     while($row=mysqli_fetch_array($query)){
+                                ?>
                             <div class="card-body">
-                                <center class="m-t-30"> <img src="../assets/images/users/5.jpg" class="img-circle" width="150" />
-                                    <h4 class="card-title m-t-10">Panjie</h4>
+                                <center class="m-t-30"> <img src="../assets/images/users/<?php
+                         echo htmlentities($row['picture']);?>" alt="<?php echo htmlentities($row['picture']); ?>" class="img-circle" width="150" />
+                                    <h4 class="card-title m-t-10"> <?php echo htmlentities($row['username'])  ?> </h4>
                                     <h6 class="card-subtitle">Admin</h6>
                                     <div class="row text-center justify-content-md-center">
                                    
@@ -247,16 +254,22 @@ if (!isset($_SESSION['username'])) {
                             </div>
                             <div>
                                 <hr> </div>
-                            <div class="card-body"> <small class="text-muted">Email address </small>
-                                <h6>panjie@gmail.com</h6> <small class="text-muted p-t-30 db">Phone</small>
-                                <h6>+91 654 784 547</h6> <small class="text-muted p-t-30 db">Address</small>
-                                <h6>71 Pilgrim Avenue Chevy Chase, MD 20815</h6>
+                            <div class="card-body"> 
+                                <small class="text-muted">Name </small>
+                                <h6> <?php echo htmlentities($row['fname'])  ?> <?php echo htmlentities($row['lname'])  ?> </h6>
+                                <br>
+                                <small class="text-muted">Email address </small>
+                                <h6> <?php echo htmlentities($row['email'])  ?> </h6> <small class="text-muted p-t-30 db">Phone</small>
+                                <h6><?php echo htmlentities($row['phone'])  ?></h6> <small class="text-muted p-t-30 db">Address</small>
+                                <h6><?php echo htmlentities($row['address'])  ?></h6>
                                  <small class="text-muted p-t-30 db">Social Profile</small>
                                 <br/>
                                 <button class="btn btn-circle btn-secondary"><i class="fa fa-facebook"></i></button>
                                 <button class="btn btn-circle btn-secondary"><i class="fa fa-twitter"></i></button>
                                 <button class="btn btn-circle btn-secondary"><i class="fa fa-youtube"></i></button>
                             </div>
+
+                        <?php } ?>
                         </div>
                     </div>
                     <!-- Column -->
