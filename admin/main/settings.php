@@ -7,6 +7,30 @@ if (!isset($_SESSION['username'])) {
     header('location:../index.php');
 } else {
 
+    $error ="";
+    $msg="";
+
+
+    if(isset($_POST['update']))
+{
+        $user= $_SESSION['username'];
+
+
+        $fname=$_POST['name'];
+        $email=$_POST['email'];
+        $phone=$_POST['phone'];
+        $address=$_POST['address'];
+        $query=mysqli_query($con,"update tbladmin set fname='$fname', email='$email', phone ='$phone', address='$address' where username='$user'");
+        if($query)
+        {
+            $msg="Profile updated ";
+        }
+        else{
+               $error="Something went wrong . Please try again.";    
+            } 
+
+        }
+
  ?>
 
 <!DOCTYPE html>
@@ -254,36 +278,62 @@ if (!isset($_SESSION['username'])) {
                                          $user= $_SESSION['username'];
                                          $query=mysqli_query($con,"SELECT * FROM tbladmin WHERE username = '$user' ");
                                         
-                                        while (mysqli_fetch_array($query)) {
+                                        while ($row= mysqli_fetch_array($query)) {
                                             
                                     
 
                                          ?>
-                                         <form class="form-horizontal form-material">
+
+                                            <div class="row">
+                                            <div class="col-sm-6">  
+                                            <!---Success Message--->  
+                                            <?php if($msg){ ?>
+                                            <div class="alert alert-success" role="alert">
+                                            <strong>Well done!</strong> <?php echo htmlentities($msg);?>
+                                            </div>
+                                            <?php } ?>
+
+                                            <!---Error Message--->
+                                            <?php if($error){ ?>
+                                            <div class="alert alert-danger" role="alert">
+                                            <strong>Oh snap!</strong> <?php echo htmlentities($error);?></div>
+                                            <?php } ?>
+
+
+                                            </div>
+                                            </div>
+                                         <form class="form-horizontal form-material"  name="updatepost" action="settings.php" method="post">
                                             <div class="form-group">
                                                 <label class="col-md-12">Full Name</label>
                                                 <div class="col-md-12">
-                                                    <input type="text" placeholder="Panjie" class="form-control form-control-line">
+                                                    <input type="text" id="name" name="name" placeholder="<?php echo $row['fname'] ?>" class="form-control form-control-line" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="example-email" class="col-md-12">Email</label>
                                                 <div class="col-md-12">
-                                                    <input type="email" placeholder="Panjie@admin.com" class="form-control form-control-line" name="example-email" id="example-email">
+                                                    <input type="email" id="email" name="email" placeholder="<?php echo $row['email'] ?>" class="form-control form-control-line" name="example-email" id="example-email" required>
                                                 </div>
                                             </div>
+
                                             
                                             <div class="form-group">
                                                 <label class="col-md-12">Phone No</label>
                                                 <div class="col-md-12">
-                                                    <input type="text" placeholder="+265 882" class="form-control form-control-line">
+                                                    <input type="text" id="phone" name="phone" placeholder="<?php echo $row['phone'] ?>" class="form-control form-control-line" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Adress</label>
+                                                <div class="col-md-12">
+                                                    <input type="text"id="address" name="address" placeholder="<?php echo $row['address'] ?>" class="form-control form-control-line" required>
                                                 </div>
                                             </div>
                                             
                                           
                                             <div class="form-group">
                                                 <div class="col-sm-12">
-                                                    <button class="btn btn-success">Update Profile</button>
+                                                    <button type="submit" name="update" class="btn btn-success">Update Profile</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -296,21 +346,21 @@ if (!isset($_SESSION['username'])) {
                                     <div class="card-body">
                                         <form class="form-horizontal form-material">
                                            <div class="form-group">
-                                                <label class="col-md-12"> Old Password</label>
+                                                <label class="col-md-12"> Old Password*</label>
                                                 <div class="col-md-12">
-                                                    <input type="password" value="password" class="form-control form-control-line">
+                                                    <input type="password" value="" class="form-control form-control-line">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-12">New Password</label>
+                                                <label class="col-md-12">New Password*</label>
                                                 <div class="col-md-12">
-                                                    <input type="password" value="password" class="form-control form-control-line">
+                                                    <input type="password" value="" class="form-control form-control-line">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-12">Re-type Password</label>
+                                                <label class="col-md-12">Re-type Password*</label>
                                                 <div class="col-md-12">
-                                                    <input type="password" value="password" class="form-control form-control-line">
+                                                    <input type="password" value="" class="form-control form-control-line">
                                                 </div>
                                             </div>
                                           
