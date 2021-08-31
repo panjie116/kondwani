@@ -181,8 +181,8 @@ if (!isset($_SESSION['username'])) {
                         <li> <a class="has-arrow waves-effect waves-dark active" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home <span class="label label-rouded label-themecolor pull-right">3</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="dashboard.php">Dashboard </a></li>
-                                <li><a class="active" href="#">Profile</a></li>
-                                <li><a href="setting.php">Settings</a></li>
+                                <li><a  href="profile.php">Profile</a></li>
+                                <li><a class="active" href="setting.php">Settings</a></li>
                             </ul>
                         </li>
                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Posts <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
@@ -218,7 +218,7 @@ if (!isset($_SESSION['username'])) {
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor"> My Profile</h3>
+                        <h3 class="text-themecolor"> Account settings</h3>
                     </div>
                    
                     
@@ -235,44 +235,103 @@ if (!isset($_SESSION['username'])) {
                 <!-- Row -->
                 <div class="row">
                     <!-- Column -->
-                    <div class="col-lg-12 col-xlg-12 col-md-5">
-                        <div class="card">
-                                 <?php 
-                                       $user= $_SESSION['username'];
-                                        $query=mysqli_query($con,"SELECT * FROM tbladmin WHERE username = '$user' ");
+                <div class="col-lg-12 col-xlg-12 col-md-5">
+                    
+             
+                 <div class="card">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs profile-tab" role="tablist">
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#home" role="tab">Update Profile</a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Change Password</a> </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                
+                                <!--first tab-->
+                                <div class="tab-pane active" id="home" role="tabpanel">
+                                    <div class="card-body">
+                                        <?php 
+                                         $user= $_SESSION['username'];
+                                         $query=mysqli_query($con,"SELECT * FROM tbladmin WHERE username = '$user' ");
+                                        
+                                        while (mysqli_fetch_array($query)) {
+                                            
+                                    
 
-                                     while($row=mysqli_fetch_array($query)){
-                                ?>
-                            <div class="card-body">
-                                <center class="m-t-30"> <img src="../assets/images/users/<?php
-                         echo htmlentities($row['picture']);?>" alt="<?php echo htmlentities($row['picture']); ?>" class="img-circle" width="150" />
-                                    <h4 class="card-title m-t-10"> <?php echo htmlentities($row['username'])  ?> </h4>
-                                    <h6 class="card-subtitle">Admin</h6>
-                                      <a href="setting.php" class="text-dark"><i class="fa fa-user m-r-5"></i> Update profile</a> </div>
-                                    <div class="row text-center justify-content-md-center">
-                                   
-                                </center>
-                            </div>
-                            <div>
-                                <hr> </div>
-                            <div class="card-body"> 
-                                <small class="text-muted">Name </small>
-                                <h6> <?php echo htmlentities($row['fname'])  ?> </h6>
-                                <br>
-                                <small class="text-muted">Email address </small>
-                                <h6> <?php echo htmlentities($row['email'])  ?> </h6> <small class="text-muted p-t-30 db">Phone</small>
-                                <h6><?php echo htmlentities($row['phone'])  ?></h6> <small class="text-muted p-t-30 db">Address</small>
-                                <h6><?php echo htmlentities($row['address'])  ?></h6>
-                                 <small class="text-muted p-t-30 db">Social Profile</small>
-                                <br/>
-                                <button class="btn btn-circle btn-secondary"><i class="fa fa-facebook"></i></button>
-                                <button class="btn btn-circle btn-secondary"><i class="fa fa-twitter"></i></button>
-                                <button class="btn btn-circle btn-secondary"><i class="fa fa-youtube"></i></button>
-                            </div>
+                                         ?>
+                                         <form class="form-horizontal form-material">
+                                            <div class="form-group">
+                                                <label class="col-md-12">Full Name</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" placeholder="Panjie" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="example-email" class="col-md-12">Email</label>
+                                                <div class="col-md-12">
+                                                    <input type="email" placeholder="Panjie@admin.com" class="form-control form-control-line" name="example-email" id="example-email">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="col-md-12">Phone No</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" placeholder="+265 882" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            
+                                          
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <button class="btn btn-success">Update Profile</button>
+                                                </div>
+                                            </div>
+                                        </form>
 
-                        <?php } ?>
+                                    <?php } ?>
+                                    </div>
+                                </div>
+                                 <!--second tab-->
+                                <div class="tab-pane" id="settings" role="tabpanel">
+                                    <div class="card-body">
+                                        <form class="form-horizontal form-material">
+                                           <div class="form-group">
+                                                <label class="col-md-12"> Old Password</label>
+                                                <div class="col-md-12">
+                                                    <input type="password" value="password" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">New Password</label>
+                                                <div class="col-md-12">
+                                                    <input type="password" value="password" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Re-type Password</label>
+                                                <div class="col-md-12">
+                                                    <input type="password" value="password" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                          
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <button class="btn btn-success">Update Password</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+
+
+               </div>    
+                
+
+                </div>
                     <!-- Column -->
                 <!-- ============================================================== -->
               
