@@ -31,6 +31,33 @@ if (!isset($_SESSION['username'])) {
 
         }
 
+
+        if(isset($_POST['password'])){
+           $q=mysqli_query($con,"select * from tbladmin where username='".$_SESSION['username']."'");
+           $n=  mysqli_fetch_assoc($q);
+
+           $user= $_SESSION['username'];
+           $oldPass=$_POST['currentPassword'];
+           $newpass=$_POST['newPassword'];
+           
+          
+
+           if ($oldPass == $n["password"]) {
+                $query= mysqli_query($con, "UPDATE tbladmin set password= '$newpass' WHERE username='".$_SESSION['username']."'");
+                if($query){
+                   $msg = "Password Changed";  
+                }
+                else{
+                    $error = "Something went wrong . Please try again.";
+                }
+               
+            } else{
+                $error = "Current Password is not correct";
+
+              }
+            }
+
+
  ?>
 
 <!DOCTYPE html>
@@ -344,29 +371,47 @@ if (!isset($_SESSION['username'])) {
                                  <!--second tab-->
                                 <div class="tab-pane" id="settings" role="tabpanel">
                                     <div class="card-body">
-                                        <form class="form-horizontal form-material">
+                                         <div class="row">
+                                            <div class="col-sm-6">  
+                                            <!---Success Message--->  
+                                            <?php if($msg){ ?>
+                                            <div class="alert alert-success" role="alert">
+                                            <strong>Well done!</strong> <?php echo htmlentities($msg);?>
+                                            </div>
+                                            <?php } ?>
+
+                                            <!---Error Message--->
+                                            <?php if($error){ ?>
+                                            <div class="alert alert-danger" role="alert">
+                                            <strong>Oh snap!</strong> <?php echo htmlentities($error);?></div>
+                                            <?php } ?>
+
+
+                                            </div>
+                                            </div>
+                                        <form class="form-horizontal form-material" name="frmChange" method="post" action="#" onSubmit="return validatePassword()">
                                            <div class="form-group">
                                                 <label class="col-md-12"> Old Password*</label>
                                                 <div class="col-md-12">
-                                                    <input type="password" value="" class="form-control form-control-line">
+                                                    <input type="password" id="currentPassword"  name="currentPassword" value="" class="form-control form-control-line">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-12">New Password*</label>
                                                 <div class="col-md-12">
-                                                    <input type="password" value="" class="form-control form-control-line">
+                                                    <input type="password" id="newPassword" name="newPassword" value="" class="form-control form-control-line">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-12">Re-type Password*</label>
                                                 <div class="col-md-12">
-                                                    <input type="password" value="" class="form-control form-control-line">
+                                                    <input type="password" value="" id="confirmPassword" name="confirmPassword" class="form-control form-control-line">
                                                 </div>
                                             </div>
                                           
                                             <div class="form-group">
                                                 <div class="col-sm-12">
-                                                    <button class="btn btn-success">Update Password</button>
+                                                    <button class="btn btn-success" type="submit" name="password" >Update Password</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -439,6 +484,53 @@ if (!isset($_SESSION['username'])) {
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+
+
+    <script type="text/javascript">
+         <script>
+                function validatePassword() {
+                var currentPassword,newPassword,confirmPassword,output = true;
+
+                currentPassword = document.frmChange.currentPassword;
+                newPassword = document.frmChange.newPassword;
+                confirmPassword = document.frmChange.confirmPassword;
+
+                if(!currentPassword.value) {
+                  currentPassword.focus();
+                  document.getElementById("currentPassword").innerHTML = "required";
+                  output = false;
+                }
+
+                
+                else if(!newPassword.value) {
+                  newPassword.focus();
+                  document.getElementById("newPassword").innerHTML = "required";
+                  output = false;
+                }
+
+                 else if(newPassword.value.length<6) {
+                  newPassword.focus();
+                  document.getElementById("newPassword").innerHTML = "password must be at least 6 characters long";
+                  output = false;
+                }
+
+                else if(!confirmPassword.value) {
+                  confirmPassword.focus();
+                  document.getElementById("confirmPassword").innerHTML = "required";
+                  output = false;
+                }
+                if(newPassword.value != confirmPassword.value) {
+                  newPassword.value="";
+                  confirmPassword.value="";
+                  newPassword.focus();
+                  document.getElementById("confirmPassword").innerHTML = "not same";
+                  output = false;
+                }   
+              return output;
+                }
+      </script>
+    </script>
 </body>
 
 
