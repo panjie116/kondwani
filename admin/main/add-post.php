@@ -65,6 +65,10 @@ if (!isset($_SESSION['username'])) {
     <!-- chartist CSS -->
     <link href="../assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
     <link href="../assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+
+    <!-- Summernote css -->
+    <link href="../assets/plugins/summernote/summernote.css" rel="stylesheet" />
+
     <!--c3 CSS -->
     <link href="../assets/plugins/c3-master/c3.min.css" rel="stylesheet">
     <!--Toaster Popup message CSS -->
@@ -405,6 +409,21 @@ if (!isset($_SESSION['username'])) {
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+    <!--Summernote js-->
+    <script src="../assets/plugins/summernote/summernote.min.js"></script>
+     <script>
+            jQuery(document).ready(function() {
+
+                $('.summernote').summernote({
+                    height: 240, // set editor height
+                    minHeight: null, // set minimum height of editor
+                    maxHeight: null, // set maximum height of editor
+                    focus: false // set focus to editable area after initializing summernote
+                });
+                
+            });
+        </script>
 </body>
 
 
