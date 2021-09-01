@@ -42,6 +42,7 @@
 								<li class="nav-item"><a class="nav-link" href="#">Auto-Biography</a>
 								<li class="nav-item"><a class="nav-link" href="#">Ads</a>
 								<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+								<li class="nav-item"><a class="nav-link" href="admin/index.php">Admin</a>
 							</ul>
 						</div> 
 					</div>

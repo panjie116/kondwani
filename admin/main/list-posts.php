@@ -7,6 +7,16 @@ if (!isset($_SESSION['username'])) {
     header('location:../index.php');
 } else {
 
+    if ($_GET['action'] = 'del') {
+      //  $postid = intval($_GET['pid']);
+        $query = mysqli_query($con, "update tblposts set Is_Active=0 where id=''");
+        if ($query) {
+            $msg = "Post deleted ";
+        } else {
+            $error = "Something went wrong . Please try again.";
+        }
+    }
+
  ?>
 
 <!DOCTYPE html>
@@ -41,6 +51,9 @@ if (!isset($_SESSION['username'])) {
     <link href="css/pages/dashboard1.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="css/colors/default-dark.css" id="theme" rel="stylesheet">
+
+      <!-- Bootstrap responsive table CSS -->
+    <link href="../assets/plugins/tablesaw-master/dist/tablesaw.css" rel="stylesheet">
    
 </head>
 
@@ -178,20 +191,23 @@ if (!isset($_SESSION['username'])) {
                         </li>
                         <li class="nav-devider"></li>
                         <li class="nav-small-cap">Admin</li>
-                        <li> <a class="has-arrow waves-effect waves-dark active" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark active" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home <span class="label label-rouded label-themecolor pull-right">3</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="index.html">Posts </a></li>
+                                <li><a href="dashboard.php">Dashboard </a></li>
+                                <li><a class="active" href="#">Profile</a></li>
+                                <li><a href="setting.php">Settings</a></li>
                             </ul>
                         </li>
-                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Posts <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
+                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Posts <span class="label label-rouded label-themecolor pull-right">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="add-post.php">Add Post</a></li>
-                                <li><a href="list-posts.php">List Posts</a></li>
+                                <li><a href="add-post.php">Add Post </a></li>
+                                <li><a class="active" href="#">View Posts </a></li>
                             </ul>
                         </li>
                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Ads <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="index.html">Posts </a></li>
+                                <li><a href="index.html">Add Ads</a></li>
+                                <li><a href="index.html">View adds </a></li>
                             </ul>
                         </li>
                        
@@ -217,7 +233,7 @@ if (!isset($_SESSION['username'])) {
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor">Welcome  <?php echo $_SESSION['username']; ?> </h3>
+                        <h3 class="text-themecolor"> List Posts</h3>
                     </div>
                    
                     
@@ -228,47 +244,62 @@ if (!isset($_SESSION['username'])) {
                 <!-- ============================================================== -->
                
                 <!-- ============================================================== -->
-                <!-- Stats box -->
                 <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Row -->
                 <div class="row">
-                    <div class="col-lg-4">
+                    <!-- Column -->
+                   <div class="col-12">
+                        <!-- Column -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Posts list</h4>
+                                <table class="tablesaw table-bordered table-hover table" data-tablesaw-mode="swipe" data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap data-tablesaw-mode-switch>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Post Title</th>
+                                            <th scope="col" data-tablesaw-sortable-col  data-tablesaw-priority="3">Category</th>
+                                            <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="2">Posting Date</th>
+                                            <th scope="col"  data-tablesaw-priority="4">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                        <?php
+                                                $query = mysqli_query($con, "select * FROM tblposts where tblposts.Is_Active=1 ");
+                                                $rowcount = mysqli_num_rows($query);
+                                                if ($rowcount == 0) {
+                                                ?>
+                                                    <tr>
 
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
-                                    <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Total opinion</h6>
-                                        <h2 class="m-t-0">23</h2></div>
-                                </div>
+                                                        <td colspan="4" align="center">
+                                                            <h3 style="color:red">No record found</h3>
+                                                        </td>
+                                                    <tr>
+                                                        <?php
+                                                    } else {
+                                                        while ($row = mysqli_fetch_array($query)) {
+                                                        ?>
+                                                    <tr>
+                                                        <td><b><?php echo htmlentities($row['PostTitle']); ?></b></td>
+                                                        <td><?php echo htmlentities($row['CategoryId']) ?></td>
+                                                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> <?php echo htmlentities($row['PostingDate']) ?> </span> </td>
+
+                                                    <td class="text-nowrap">
+                                                        <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                                        <a href="#" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i> </a>
+                                                    </td>
+                                                    </tr>
+                                            <?php }
+                                                    } ?>
+
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
-                                    <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Total Ads</h6>
-                                        <h2 class="m-t-0">2</h2></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
-                                    <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Trash</h6>
-                                        <h2 class="m-t-0">9</h2></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        </div>  
+                  
+                    <!-- Column -->
                 <!-- ============================================================== -->
               
                 <!-- ============================================================== -->
@@ -325,6 +356,12 @@ if (!isset($_SESSION['username'])) {
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+      <!-- jQuery peity -->
+    <script src="../assets/plugins/tablesaw-master/dist/tablesaw.js"></script>
+    <script src="../assets/plugins/tablesaw-master/dist/tablesaw-init.js"></script>
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
 </body>
 
 
