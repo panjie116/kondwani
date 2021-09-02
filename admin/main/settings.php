@@ -236,9 +236,18 @@ if (!isset($_SESSION['username'])) {
                                 <li><a class="active" href="setting.php">Settings</a></li>
                             </ul>
                         </li>
+
+                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Categories <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="add-category.php">Add category</a></li>
+                                <li><a href="list-categories.php">List Categories</a></li>
+                            </ul>
+                        </li>
+
                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Posts <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="index.html">Add Post </a></li>
+                                <li><a href="add-post.php">Add Post </a></li>
+                                 <li><a href="list-posts.php">List Posts </a></li> 
                             </ul>
                         </li>
                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Ads <span class="label label-rouded label-themecolor pull-right">4</span></span></a>

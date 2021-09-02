@@ -185,10 +185,19 @@ if (!isset($_SESSION['username'])) {
                                 <li><a href="settings.php">Settings</a></li>
                             </ul>
                         </li>
+
+
+                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Categories <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="add-category.php">Add category</a></li>
+                                <li><a href="list-categories.php">List Categories</a></li>
+                            </ul>
+                        </li>
+
                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Posts <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="add-post.php">Add Post </a></li>
-                                <li><a class="active" href="#">View Posts </a></li>
+                                <li><a href="#">View Posts </a></li>
                             </ul>
                         </li>
                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Ads <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
@@ -249,7 +258,7 @@ if (!isset($_SESSION['username'])) {
                          echo htmlentities($row['picture']);?>" alt="<?php echo htmlentities($row['picture']); ?>" class="img-circle" width="150" />
                                     <h4 class="card-title m-t-10"> <?php echo htmlentities($row['username'])  ?> </h4>
                                     <h6 class="card-subtitle">Admin</h6>
-                                      <a href="setting.php" class="text-dark"><i class="fa fa-user m-r-5"></i> Update profile</a> </div>
+                                      <a href="settings.php" class="text-dark"><i class="fa fa-user m-r-5"></i> Update profile</a> </div>
                                     <div class="row text-center justify-content-md-center">
                                    
                                 </center>
