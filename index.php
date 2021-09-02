@@ -46,11 +46,11 @@ include 'admin/includes/conn.php'
 						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 							<ul class="nav navbar-nav menu_nav ml-auto">
 								<li class="nav-item active"><a class="nav-link" href="#">Home</a></li> 
-								<li class="nav-item"><a class="nav-link" href="#">About</a></li> 
-								<li class="nav-item"><a class="nav-link" href="#">Opinion</a></li> 
-								<li class="nav-item"><a class="nav-link" href="#">Auto-Biography</a>
-								<li class="nav-item"><a class="nav-link" href="#">Ads</a>
-								<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+								<li class="nav-item"><a class="nav-link" href="#about">About</a></li> 
+								<li class="nav-item"><a class="nav-link" href="#opinion">Opinion</a></li> 
+								<li class="nav-item"><a class="nav-link" href="#autobiography">Auto-Biography</a>
+								<li class="nav-item"><a class="nav-link" href="#ads">Ads</a>
+								<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
 								<li class="nav-item"><a class="nav-link" href="admin/index.php">Admin</a>
 							</ul>
 						</div> 
@@ -85,7 +85,7 @@ include 'admin/includes/conn.php'
         <!--================End Home Banner Area =================-->
         
         <!--================Welcome Area =================-->
-        <section class="welcome_area p_120">
+        <section class="welcome_area p_120" id="about">
         	<div class="container">
         		<div class="row welcome_inner">
         			<div class="col-lg-6">
@@ -130,7 +130,7 @@ include 'admin/includes/conn.php'
 
 
           <!--================Latest Blog Area =================-->
-        <section class="latest_blog_area p_120">
+        <section class="latest_blog_area p_120" id="opinion">
         	<div class="container">
         		<div class="main_title">
         			<h2>Opinion Column</h2>
@@ -170,7 +170,7 @@ include 'admin/includes/conn.php'
         <!--================End Latest Blog Area =================-->
         
         <!--================Feature Area =================-->
-        <section class="feature_area p_120">
+        <section class="feature_area p_120" id="autobiography">
         	<div class="container">
         		<div class="main_title">
         			<h2>Autobiography</h2>
@@ -197,7 +197,7 @@ include 'admin/includes/conn.php'
         
       
         <!--================Testimonials Area =================-->
-        <section class="testimonials_area p_120">
+        <section class="testimonials_area p_120" id="ads">
         	<div class="container">
         		<div class="main_title">
         			<h2>Advertisments</h2>
@@ -237,7 +237,7 @@ include 'admin/includes/conn.php'
 
 
          <!--================Contact Area =================-->
-        <section class="contact_area p_120">
+        <section class="contact_area p_120" id="contact">
             <div class="container">
                                 <div class="row">
                     <div class="col-lg-3">

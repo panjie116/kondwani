@@ -265,8 +265,8 @@ if (!isset($_SESSION['username'])) {
                                 <table class="tablesaw table-bordered table-hover table" data-tablesaw-mode="swipe" data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap data-tablesaw-mode-switch>
                                     <thead>
                                         <tr>
-                                            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Post Title</th>
-                                            <th scope="col" data-tablesaw-sortable-col  data-tablesaw-priority="3">Category</th>
+                                            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Category Title</th>
+                                            <th scope="col" data-tablesaw-sortable-col  data-tablesaw-priority="3">Description</th>
                                             <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="2">Date Added</th>
                                             <th scope="col"  data-tablesaw-priority="4">Action</th>
                                         </tr>
