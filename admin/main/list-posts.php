@@ -201,7 +201,7 @@ if (!isset($_SESSION['username'])) {
                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Posts <span class="label label-rouded label-themecolor pull-right">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="add-post.php">Add Post </a></li>
-                                <li><a class="active" href="#">View Posts </a></li>
+                            
                             </ul>
                         </li>
                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Ads <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
@@ -267,7 +267,8 @@ if (!isset($_SESSION['username'])) {
                                     <tbody>
                                        
                                         <?php
-                                                $query = mysqli_query($con, "select * FROM tblposts where tblposts.Is_Active=1 ");
+                                         $query = mysqli_query($con, "select tblposts.id as postid, tblposts.PostingDate as date , tblposts.PostTitle as title,tblcategory.CategoryName as category from tblposts left join tblcategory on tblcategory.id=tblposts.CategoryId where tblposts.Is_Active=1 ");
+
                                                 $rowcount = mysqli_num_rows($query);
                                                 if ($rowcount == 0) {
                                                 ?>
@@ -282,9 +283,9 @@ if (!isset($_SESSION['username'])) {
                                                         while ($row = mysqli_fetch_array($query)) {
                                                         ?>
                                                     <tr>
-                                                        <td><b><?php echo htmlentities($row['PostTitle']); ?></b></td>
-                                                        <td><?php echo htmlentities($row['CategoryId']) ?></td>
-                                                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> <?php echo htmlentities($row['PostingDate']) ?> </span> </td>
+                                                        <td><b><?php echo htmlentities($row['title']); ?></b></td>
+                                                        <td><?php echo htmlentities($row['category']) ?></td>
+                                                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> <?php echo htmlentities($row['date']) ?> </span> </td>
 
                                                     <td class="text-nowrap">
                                                         <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>

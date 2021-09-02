@@ -266,7 +266,7 @@ if (!isset($_SESSION['username'])) {
                                         <tr>
                                             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Post Title</th>
                                             <th scope="col" data-tablesaw-sortable-col  data-tablesaw-priority="3">Category</th>
-                                            <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="2">Posting Date</th>
+                                            <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="2">Date Added</th>
                                             <th scope="col"  data-tablesaw-priority="4">Action</th>
                                         </tr>
                                     </thead>
