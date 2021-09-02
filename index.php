@@ -1,3 +1,12 @@
+<?php 
+
+include 'admin/includes/conn.php'
+
+
+
+ ?>
+
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -128,6 +137,14 @@
         			
         		</div>
         		<div class="row latest_blog_inner">
+
+        			<?php
+        			  $query = mysqli_query($con, "select * FROM tblposts where tblposts.Is_Active=1 LIMIT 4 ");
+
+        			  	while ($row=mysqli_fetch_array($query)) {
+        			  		
+        			 
+        			  ?>
         			<div class="col-lg-3">
         				<div class="l_blog_item">
         					<div class="l_blog_img">
@@ -135,58 +152,20 @@
         					</div>
         					<div class="l_blog_text">
         						<div class="date">
-        							<a href="#">25 October, 2021  |  By Kho</a>
+        							<a href="#">  <?php  echo $row['PostingDate']; ?>  |  By Kondwani</a>
         						</div>
-        						<a href="#"><h4>Addiction When Gambling Becomes A Problem</h4></a>
-        						
-        					</div>
-        				</div>
-        			</div>
-        			<div class="col-lg-3">
-        				<div class="l_blog_item">
-        					<div class="l_blog_img">
-        						<img class="img-fluid" src="admin/postimages/p1.jpg" alt="">
-        					</div>
-        					<div class="l_blog_text">
-        						<div class="date">
-        							<a href="#">25 October, 2021  |  By Kho</a>
-        						</div>
-        						<a href="#"><h4>Make Myspace Your Best Designed Space</h4></a>
-        						
-        					</div>
-        				</div>
-        			</div>
-        			<div class="col-lg-3">
-        				<div class="l_blog_item">
-        					<div class="l_blog_img">
-        						<img class="img-fluid" src="admin/postimages/p1.jpg" alt="">
-        					</div>
-        					<div class="l_blog_text">
-        						<div class="date">
-        							<a href="#">25 October, 2021  |  By Kho</a>
-        						</div>
-        						<a href="#"><h4>Video Games Playing With Imagination</h4></a>
+        						<a href="#"><h4> <?php  echo $row['PostTitle']; ?> </h4></a>
         						
         					</div>
         				</div>
         			</div>
 
-        			<div class="col-lg-3">
-        				<div class="l_blog_item">
-        					<div class="l_blog_img">
-        						<img class="img-fluid" src="admin/postimages/p1.jpg" alt="">
-        					</div>
-        					<div class="l_blog_text">
-        						<div class="date">
-        							<a href="#">25 October, 2021  |  By Kho</a>
-        						</div>
-        						<a href="#"><h4>Video Games Playing With Imagination</h4></a>
-        						
-        					</div>
-        				</div>
-        			</div>
+	<?php } ?>
         		</div>
+        	
         	</div>
+
+        	 
         </section>
         <!--================End Latest Blog Area =================-->
         
