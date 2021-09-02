@@ -148,7 +148,7 @@ include 'admin/includes/conn.php'
         			<div class="col-lg-3">
         				<div class="l_blog_item">
         					<div class="l_blog_img">
-        						<img class="img-fluid" src="admin/postimages/p1.jpg" alt="">
+        						 <a href="news-details.php?nid=<?php echo htmlentities($row['id']) ?>"><img src="admin/postimages/<?php echo htmlentities($row['PostImage']); ?>" alt="<?php echo htmlentities($row['PostImage']);  ?>" width="230" height="180"></a>
         					</div>
         					<div class="l_blog_text">
         						<div class="date">
