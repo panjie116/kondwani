@@ -7,6 +7,21 @@ if (!isset($_SESSION['username'])) {
     header('location:../index.php');
 } else {
 
+    $error ="";
+      $msg="";
+
+     if (isset($_POST['submit'])) {
+        $category = $_POST['category'];
+        $description = $_POST['description'];
+        $status = 1;
+        $query = mysqli_query($con, "insert into tblcategory(CategoryName,Description,Is_Active) values('$category','$description','$status')");
+        if ($query) {
+            $msg = "Category created ";
+        } else {
+            $error = "Something went wrong . Please try again.";
+        }
+    }
+
  ?>
 
 <!DOCTYPE html>
@@ -178,28 +193,30 @@ if (!isset($_SESSION['username'])) {
                         </li>
                         <li class="nav-devider"></li>
                         <li class="nav-small-cap">Admin</li>
-                        <li> <a class="has-arrow waves-effect waves-dark active" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark active" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home <span class="label label-rouded label-themecolor pull-right">3</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="dashboard.php">Dashboard </a></li>
-                                <li><a href="profile.php">Profile</a></li>
-                                <li><a href="setting.php">Settings</a></li>
+                                <li><a class="active" href="#">Profile</a></li>
+                                <li><a href="settings.php">Settings</a></li>
                             </ul>
                         </li>
-                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Categories <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
+                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Categories <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="add-category.php">Add category</a></li>
                                 <li><a href="list-categories.php">List Categories</a></li>
                             </ul>
                         </li>
+
+
                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Posts <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="add-post.php">Add Post</a></li>
-                                <li><a href="list-posts.php">List Posts</a></li>
+                                <li><a href="add-post.php">Add Post </a></li>
+                                <li><a class="active" href="#">View Posts </a></li>
                             </ul>
                         </li>
                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Ads <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="#">Posts </a></li>
+                                <li><a href="index.html">Posts </a></li>
                             </ul>
                         </li>
                        
@@ -225,7 +242,7 @@ if (!isset($_SESSION['username'])) {
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor">Welcome  <?php echo $_SESSION['username']; ?> </h3>
+                        <h3 class="text-themecolor"> My Profile</h3>
                     </div>
                    
                     
@@ -236,47 +253,71 @@ if (!isset($_SESSION['username'])) {
                 <!-- ============================================================== -->
                
                 <!-- ============================================================== -->
-                <!-- Stats box -->
                 <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Row -->
                 <div class="row">
-                    <div class="col-lg-4">
+                    <!-- Column -->
 
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
-                                    <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Total opinion</h6>
-                                        <h2 class="m-t-0">23</h2></div>
-                                </div>
-                            </div>
-                        </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <!---Success Message--->
+                                            <?php if ($msg) { ?>
+                                                <div class="alert alert-success" role="alert">
+                                                    <strong>Well done!</strong> <?php echo htmlentities($msg); ?>
+                                                </div>
+                                            <?php } ?>
+
+                                            <!---Error Message--->
+                                            <?php if ($error) { ?>
+                                                <div class="alert alert-danger" role="alert">
+                                                    <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                </div>
+                                            <?php } ?>
+
+
+                                        </div>
+                                    </div>
+                    <div class="col-lg-12 col-xlg-12 col-md-5">
+                        
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <form class="form-horizontal" name="category" method="post">
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Category</label>
+                                                    <div class="col-md-10">
+                                                        <input type="text" class="form-control" value="" name="category" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Category Description</label>
+                                                    <div class="col-md-10">
+                                                        <textarea class="form-control" rows="5" name="description" required></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">&nbsp;</label>
+                                                    <div class="col-md-10">
+
+                                                        <button type="submit" class="btn btn-custom waves-effect waves-light btn-md" name="submit">
+                                                            Submit
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+
+
+                                    </div>
+
+
                     </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
-                                    <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Total Ads</h6>
-                                        <h2 class="m-t-0">2</h2></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
-                                    <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Trash</h6>
-                                        <h2 class="m-t-0">9</h2></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <!-- Column -->
                 <!-- ============================================================== -->
               
                 <!-- ============================================================== -->
