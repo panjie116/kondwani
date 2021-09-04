@@ -12,7 +12,7 @@ if(isset($_POST['login'])){
     $username =htmlentities(mysqli_escape_string($con,$_POST['username']));
     $password = htmlentities(mysqli_escape_string($con,$_POST['password']));
 
-    $query=mysqli_query($con,"SELECT * FROM tbladmin WHERE username ='$username' AND password='$password'");
+    $query=mysqli_query($con,"SELECT * FROM tbladmin WHERE username ='$username'");
     if(mysqli_num_rows($query) == 1){
 
         $row=mysqli_fetch_array($query);
