@@ -171,27 +171,49 @@ include 'admin/includes/conn.php'
         
         <!--================Feature Area =================-->
         <section class="feature_area p_120" id="autobiography">
-        	<div class="container">
-        		<div class="main_title">
-        			<h2>Autobiography</h2>
-        		</div>
-        		<div class="feature_inner row">
-        			<div class="col-lg-12 col-md-6">
-        				<div class="feature_item">
-        					<div class="row">
-							<div class="col-md-3">
-								<img src="img/cake1.jpg" alt="" class="img-fluid">
-							</div>
-							<div class="col-md-9 mt-sm-20 left-align-p">
-								<p>Recently, the US Federal government banned online casinos from operating in America by making it illegal to transfer money to them through any US bank or payment system. As a result of this law, most of the popular online casino networks such as Party Gaming and PlayTech left the United States. Overnight, online casino players found themselves being chased by the Federal government. <br><br>
+        	 <div class="container">
+				    <div class="section-title center">
+				      <h2>Autobiography</h2>
+				      <hr>
+				    </div>
+				    <div class="row">
+				      <div class="col-lg-12">
+				        <ul class="timeline">
+				          <li>
+				            <div class="timeline-image">
+				              <h4>  </h4>
+				            </div>
+				            <div class="timeline-panel">
+				              <div class="timeline-heading">
+				                <h4>Creative Agency</h4>
+				                <h4 class="subheading">UX Developer</h4>
+				              </div>
+				              <div class="timeline-body">
+				                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
+				              </div>
+				            </div>
+				          </li>
 
-								 But, after a fortnight, the online casino industry came up with a solution and new online casinos started taking root. As a result of this law, most of the popular online casino networks such as Party Gaming and PlayTech left the United States. Overnight, online casino players found themselves.... <a href="#" class="genric-btn info-border circle arrow">Read More!<span class="lnr lnr-arrow-right"></span></a></p>
-							</div>
-						</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
+				          <li>
+				            <div class="timeline-image">
+				              <h4>  </h4>
+				            </div>
+				            <div class="timeline-panel">
+				              <div class="timeline-heading">
+				                <h4>Creative Agency</h4>
+				                <h4 class="subheading">UX Developer</h4>
+				              </div>
+				              <div class="timeline-body">
+				                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
+				              </div>
+				            </div>
+				          </li>
+
+				        </ul>
+				      </div>
+				    </div>
+				  </div>
+				</div>
         </section>
         <!--================End Feature Area =================-->
         
