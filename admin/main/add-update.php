@@ -12,7 +12,6 @@ if (!isset($_SESSION['username'])) {
 
      if (isset($_POST['submit'])) {
         $posttitle = $_POST['posttitle'];
-        $catid = $_POST['category'];
         $postdetails = $_POST['postdescription'];
         $arr = explode(" ", $posttitle);
         $url = implode("-", $arr);
@@ -31,9 +30,9 @@ if (!isset($_SESSION['username'])) {
             move_uploaded_file($_FILES["postimage"]["tmp_name"], "../postimages/" . $imgnewfile);
 
             $status = 1;
-            $query = mysqli_query($con, "insert into tblposts(PostTitle,CategoryId,PostDetails,PostUrl,Is_Active,PostImage) values('$posttitle','$catid','$postdetails','$url','$status','$imgnewfile')");
+            $query = mysqli_query($con, "insert into tblupdates(PostTitle,PostDetails,PostUrl,Is_Active,PostImage) values('$posttitle','$postdetails','$url','$status','$imgnewfile')");
             if ($query) {
-                $msg = "Post successfully added ";
+                $msg = "Update successfully added ";
             } else {
                 $error = "Something went wrong . Please try again.";
             }
@@ -298,32 +297,15 @@ if (!isset($_SESSION['username'])) {
                                         </div>
                                         <form name="addpost" method="post" enctype="multipart/form-data">
                                             <div class="form-group m-b-20">
-                                                <label for="exampleInputEmail1">Post Title</label>
+                                                <label for="exampleInputEmail1">Update Title</label>
                                                 <input type="text" class="form-control" id="posttitle" name="posttitle" placeholder="Enter title" required>
-                                            </div>
-
-
-
-                                            <div class="form-group m-b-20">
-                                                <label for="exampleInputEmail1">Category</label>
-                                                <select class="form-control" name="category" id="category" onChange="getSubCat(this.value);" >
-                                                    <option value="">Select Category </option>
-                                                    <?php
-                                                    // Feching active categories
-                                                    $ret = mysqli_query($con, "select id,CategoryName from  tblcategory where Is_Active=1");
-                                                    while ($result = mysqli_fetch_array($ret)) {
-                                                    ?>
-                                                        <option value="<?php echo htmlentities($result['id']); ?>"><?php echo htmlentities($result['CategoryName']); ?></option>
-                                                    <?php } ?>
-
-                                                </select>
                                             </div>
 
 
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="card-box">
-                                                        <h4 class="m-b-30 m-t-0 header-title"><b>Post Details</b></h4>
+                                                        <h4 class="m-b-30 m-t-0 header-title"><b>Update Details</b></h4>
                                                         <textarea class="summernote" name="postdescription" required></textarea>
                                                     </div>
                                                 </div>
@@ -333,7 +315,7 @@ if (!isset($_SESSION['username'])) {
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="card-box">
-                                                        <h4 class="m-b-30 m-t-0 header-title"><b>Feature Image</b></h4>
+                                                        <h4 class="m-b-30 m-t-0 header-title"><b>Update Image</b></h4>
                                                         <input type="file" class="form-control" id="postimage" name="postimage" required>
                                                     </div>
                                                 </div>
