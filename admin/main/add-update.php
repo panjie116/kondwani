@@ -7,6 +7,40 @@ if (!isset($_SESSION['username'])) {
     header('location:../index.php');
 } else {
 
+      $error ="";
+      $msg="";
+
+     if (isset($_POST['submit'])) {
+        $posttitle = $_POST['posttitle'];
+        $catid = $_POST['category'];
+        $postdetails = $_POST['postdescription'];
+        $arr = explode(" ", $posttitle);
+        $url = implode("-", $arr);
+        $imgfile = $_FILES["postimage"]["name"];
+        // get the image extension
+        $extension = substr($imgfile, strlen($imgfile) - 4, strlen($imgfile));
+        // allowed extensions
+        $allowed_extensions = array(".jpg", "jpeg", ".png", ".gif");
+        // Validation for allowed extensions .in_array() function searches an array for a specific value.
+        if (!in_array($extension, $allowed_extensions)) {
+            echo "<script>alert('Invalid format. Only jpg / jpeg/ png /gif format allowed');</script>";
+        } else {
+            //rename the image file
+            $imgnewfile = md5($imgfile) . $extension;
+            // Code for move image into directory
+            move_uploaded_file($_FILES["postimage"]["tmp_name"], "../postimages/" . $imgnewfile);
+
+            $status = 1;
+            $query = mysqli_query($con, "insert into tblposts(PostTitle,CategoryId,PostDetails,PostUrl,Is_Active,PostImage) values('$posttitle','$catid','$postdetails','$url','$status','$imgnewfile')");
+            if ($query) {
+                $msg = "Post successfully added ";
+            } else {
+                $error = "Something went wrong . Please try again.";
+            }
+        }
+
+    }
+
  ?>
 
 <!DOCTYPE html>
@@ -31,6 +65,10 @@ if (!isset($_SESSION['username'])) {
     <!-- chartist CSS -->
     <link href="../assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
     <link href="../assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+
+    <!-- Summernote css -->
+    <link href="../assets/plugins/summernote/summernote.css" rel="stylesheet" />
+
     <!--c3 CSS -->
     <link href="../assets/plugins/c3-master/c3.min.css" rel="stylesheet">
     <!--Toaster Popup message CSS -->
@@ -178,37 +216,22 @@ if (!isset($_SESSION['username'])) {
                         </li>
                         <li class="nav-devider"></li>
                         <li class="nav-small-cap">Admin</li>
-                        <li> <a class="has-arrow waves-effect waves-dark active" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark active" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home <span class="label label-rouded label-themecolor pull-right">3</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="dashboard.php">Dashboard </a></li>
                                 <li><a href="profile.php">Profile</a></li>
                                 <li><a href="setting.php">Settings</a></li>
                             </ul>
                         </li>
-                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Categories <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="add-category.php">Add category</a></li>
-                                <li><a href="list-categories.php">List Categories</a></li>
-                            </ul>
-                        </li>
                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Posts <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="add-post.php">Add Post</a></li>
-                                <li><a href="list-posts.php">List Posts</a></li>
+                                <li><a class="active" href="#">Add Post </a></li>
+                                 <li><a href="list-posts.php">List Posts</a></li>
                             </ul>
                         </li>
-
-
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Auto-Biography<span class="label label-rouded label-themecolor pull-right">2</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="add-update.php">Add update</a></li>
-                                <li><a href="list-posts.php">List updates</a></li>
-                            </ul>
-                        </li>
-
                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Ads <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="#">Posts </a></li>
+                                <li><a href="add-ad.php">Add Ads</a></li>
                             </ul>
                         </li>
                        
@@ -234,7 +257,7 @@ if (!isset($_SESSION['username'])) {
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor">Welcome  <?php echo $_SESSION['username']; ?> </h3>
+                        <h3 class="text-themecolor"> Add Post</h3>
                     </div>
                    
                     
@@ -245,47 +268,92 @@ if (!isset($_SESSION['username'])) {
                 <!-- ============================================================== -->
                
                 <!-- ============================================================== -->
-                <!-- Stats box -->
                 <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Row -->
                 <div class="row">
-                    <div class="col-lg-4">
+                    <!-- Column -->
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="p-6">
+                                    <div class="">
+                                          <div class="row">
+                                            <div class="col-sm-6">
+                                                <!---Success Message--->
+                                                <?php if ($msg) { ?>
+                                                    <div class="alert alert-success" role="alert">
+                                                        <strong>Well done!</strong> <?php echo htmlentities($msg); ?>
+                                                    </div>
+                                                <?php } ?>
 
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
-                                    <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Total opinion</h6>
-                                        <h2 class="m-t-0">23</h2></div>
-                                </div>
-                            </div>
+                                                <!---Error Message--->
+                                                <?php if ($error) { ?>
+                                                    <div class="alert alert-danger" role="alert">
+                                                        <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                    </div>
+                                                <?php } ?>
+
+
+                                            </div>
+                                        </div>
+                                        <form name="addpost" method="post" enctype="multipart/form-data">
+                                            <div class="form-group m-b-20">
+                                                <label for="exampleInputEmail1">Post Title</label>
+                                                <input type="text" class="form-control" id="posttitle" name="posttitle" placeholder="Enter title" required>
+                                            </div>
+
+
+
+                                            <div class="form-group m-b-20">
+                                                <label for="exampleInputEmail1">Category</label>
+                                                <select class="form-control" name="category" id="category" onChange="getSubCat(this.value);" >
+                                                    <option value="">Select Category </option>
+                                                    <?php
+                                                    // Feching active categories
+                                                    $ret = mysqli_query($con, "select id,CategoryName from  tblcategory where Is_Active=1");
+                                                    while ($result = mysqli_fetch_array($ret)) {
+                                                    ?>
+                                                        <option value="<?php echo htmlentities($result['id']); ?>"><?php echo htmlentities($result['CategoryName']); ?></option>
+                                                    <?php } ?>
+
+                                                </select>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="card-box">
+                                                        <h4 class="m-b-30 m-t-0 header-title"><b>Post Details</b></h4>
+                                                        <textarea class="summernote" name="postdescription" required></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="card-box">
+                                                        <h4 class="m-b-30 m-t-0 header-title"><b>Feature Image</b></h4>
+                                                        <input type="file" class="form-control" id="postimage" name="postimage" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <button type="submit" name="submit" class="btn btn-success waves-effect waves-light">Save and Post</button>
+                                            <button type="button" class="btn btn-danger waves-effect waves-light">Discard</button>
+                                        </form>
+                                    </div>
+                                </div> <!-- end p-20 -->
+                           
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
-                                    <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Total Ads</h6>
-                                        <h2 class="m-t-0">2</h2></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
-                                    <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Trash</h6>
-                                        <h2 class="m-t-0">9</h2></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        <!-- end row -->
+
+
+
+                    </div> <!-- container -->
+
+                    <!-- Column -->
                 <!-- ============================================================== -->
               
                 <!-- ============================================================== -->
@@ -342,6 +410,21 @@ if (!isset($_SESSION['username'])) {
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+    <!--Summernote js-->
+    <script src="../assets/plugins/summernote/summernote.min.js"></script>
+     <script>
+            jQuery(document).ready(function() {
+
+                $('.summernote').summernote({
+                    height: 240, // set editor height
+                    minHeight: null, // set minimum height of editor
+                    maxHeight: null, // set maximum height of editor
+                    focus: false // set focus to editable area after initializing summernote
+                });
+                
+            });
+        </script>
 </body>
 
 
