@@ -3151,11 +3151,20 @@ h6 {
 .timeline .timeline-heading h4.subheading {
 	text-transform: none;
 	color: #629ca7;
-	font-size: 20px;
+	font-size: 12px;
 }
 .timeline .timeline-body>p, .timeline .timeline-body>ul {
 	margin-bottom: 0;
 }
+
+
+.timeline a {
+  text-decoration: none;
+  transition: all 0.3s ease-in-out; }
+  a:hover, a:focus {
+    text-decoration: none;
+    outline: none; }
+
 
 /* End Footer Area css
 

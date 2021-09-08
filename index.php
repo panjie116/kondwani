@@ -178,6 +178,13 @@ include 'admin/includes/conn.php'
 				    </div>
 				    <div class="row">
 				      <div class="col-lg-12">
+				      	<?php
+        			  $query = mysqli_query($con, "select * FROM tblupdates where tblupdates.Is_Active=1 LIMIT 4 ");
+
+        			  	while ($row=mysqli_fetch_array($query)) {
+        			  		
+        			 
+        			  ?> 
 				        <ul class="timeline">
 				          <li>
 				            <div class="timeline-image">
@@ -185,31 +192,18 @@ include 'admin/includes/conn.php'
 				            </div>
 				            <div class="timeline-panel">
 				              <div class="timeline-heading">
-				                <h4>Creative Agency</h4>
-				                <h4 class="subheading">UX Developer</h4>
+				                <h4> <a href="#"><h4> <?php  echo $row['PostTitle']; ?> </h4></a> </h4>
+				                <h4 class="subheading"> <?php echo $row['PostingDate'] ?> </h4>
 				              </div>
 				              <div class="timeline-body">
-				                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
-				              </div>
-				            </div>
-				          </li>
-
-				          <li>
-				            <div class="timeline-image">
-				              <h4>  </h4>
-				            </div>
-				            <div class="timeline-panel">
-				              <div class="timeline-heading">
-				                <h4>Creative Agency</h4>
-				                <h4 class="subheading">UX Developer</h4>
-				              </div>
-				              <div class="timeline-body">
-				                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
+				                <p><?php echo $row['PostDetails'] ?></p>
 				              </div>
 				            </div>
 				          </li>
 
 				        </ul>
+
+				        	<?php } ?>
 				      </div>
 				    </div>
 				  </div>

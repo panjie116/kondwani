@@ -1,11 +1,12 @@
 <?php 
 include '../includes/conn.php';
-
 //error_reporting(0);
 session_start();
 if (!isset($_SESSION['username'])) {
     header('location:../index.php');
 } else {
+
+
 
  ?>
 
@@ -41,6 +42,9 @@ if (!isset($_SESSION['username'])) {
     <link href="css/pages/dashboard1.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="css/colors/default-dark.css" id="theme" rel="stylesheet">
+
+      <!-- Bootstrap responsive table CSS -->
+    <link href="../assets/plugins/tablesaw-master/dist/tablesaw.css" rel="stylesheet">
    
 </head>
 
@@ -178,44 +182,23 @@ if (!isset($_SESSION['username'])) {
                         </li>
                         <li class="nav-devider"></li>
                         <li class="nav-small-cap">Admin</li>
-                        <li> <a class="has-arrow waves-effect waves-dark active" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark active" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home <span class="label label-rouded label-themecolor pull-right">3</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="dashboard.php">Dashboard </a></li>
-                                <li><a href="profile.php">Profile</a></li>
+                                <li><a class="active" href="#">Profile</a></li>
                                 <li><a href="setting.php">Settings</a></li>
                             </ul>
                         </li>
-                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Categories <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
+                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Posts <span class="label label-rouded label-themecolor pull-right">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="add-category.php">Add category</a></li>
-                                <li><a href="list-categories.php">List Categories</a></li>
+                                <li><a href="add-post.php">Add Post </a></li>
+                            
                             </ul>
                         </li>
-                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Posts <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="add-post.php">Add Post</a></li>
-                                <li><a href="list-posts.php">List Posts</a></li>
-                            </ul>
-                        </li>
-
-
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Auto-Biography<span class="label label-rouded label-themecolor pull-right">2</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="add-update.php">Add update</a></li>
-                                <li><a href="list-posts.php">List updates</a></li>
-                            </ul>
-                        </li>
-
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Comments<span class="label label-rouded label-themecolor pull-right">2</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="unapproved.php">To-be approved</a></li>
-                                <li><a href="approved.php">Approved</a></li>
-                            </ul>
-                        </li>
-
                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Ads <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="#">Posts </a></li>
+                                <li><a href="index.html">Add Ads</a></li>
+                                <li><a href="index.html">View adds </a></li>
                             </ul>
                         </li>
                        
@@ -241,7 +224,7 @@ if (!isset($_SESSION['username'])) {
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor">Welcome  <?php echo $_SESSION['username']; ?> </h3>
+                        <h3 class="text-themecolor"> Unapproved comments</h3>
                     </div>
                    
                     
@@ -252,47 +235,81 @@ if (!isset($_SESSION['username'])) {
                 <!-- ============================================================== -->
                
                 <!-- ============================================================== -->
-                <!-- Stats box -->
                 <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Row -->
                 <div class="row">
-                    <div class="col-lg-4">
+                    <!-- Column -->
+                   <div class="col-12">
+                        <!-- Column -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Comments List</h4>
+                                <table class="tablesaw table-bordered table-hover table" data-tablesaw-mode="swipe" data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap data-tablesaw-mode-switch>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">#</th>
+                                            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Name</th>
+                                            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Email</th>
+                                            <th scope="col" data-tablesaw-sortable-col  data-tablesaw-priority="3" width="300">Comment</th>
+                                            <th scope="col" data-tablesaw-sortable-col  data-tablesaw-priority="3">Status</th>
+                                            <th scope="col" data-tablesaw-sortable-col  data-tablesaw-priority="3">News</th>
+                                            <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="2">Date</th>
+                                            <th scope="col"  data-tablesaw-priority="4">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                     
+                    <?php 
+                    $query=mysqli_query($con,"Select tblcomments.id,  tblcomments.name,  tblcomments.status ,tblcomments.email,tblcomments.postingDate,tblcomments.comment,tblposts.id as postid,tblposts.PostTitle from  tblcomments join tblposts on tblposts.id=tblcomments.postId where tblcomments.status=0");
+                    $cnt=1;
+                    while($row=mysqli_fetch_array($query))
+                    {
+                    ?>
 
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
-                                    <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Total opinion</h6>
-                                        <h2 class="m-t-0">23</h2></div>
-                                </div>
+                     <tr>
+                    <th scope="row"><?php echo htmlentities($cnt);?></th>
+                    <td><?php echo htmlentities($row['name']);?></td>
+                    <td><?php echo htmlentities($row['email']);?></td>
+                    <td><?php echo htmlentities($row['comment']);?></td>
+                    <td> 
+                    <span class="label label-warning">
+                        
+                         <?php $st=$row['status'];
+                    if($st=='0'):
+                    echo "Unapproved";
+
+                    else:
+                    echo "Approved";
+                    endif;
+                    ?>
+                    </span>
+
+                    </td>
+
+
+                <td><a href="edit-post.php?pid=<?php echo htmlentities($row['postid']);?>"><?php echo htmlentities($row['PostTitle']);?></a> </td>
+                <td><?php echo htmlentities($row['postingDate']);?></td>
+                <td>
+                <?php if($st=='0'):?>
+                    <a href="unapprove-comment.php?disid=<?php echo htmlentities($row['id']);?>" title="Disapprove this comment"><i class="fa fa-trash-o" style="color: #29b6f6;"></i></a> 
+                <?php else :?>
+                  <a href="unapprove-comment.php?appid=<?php echo htmlentities($row['id']);?>" title="Approve this comment"><i class="fa fa-trash-o" style="color: green;"></i></a> 
+                <?php endif;?>
+
+                    &nbsp;<a href="unapprove-comment.php?rid=<?php echo htmlentities($row['id']);?>&&action=del"> <i class="fa fa-trash-o" style="color: #f05050"></i></a> </td>
+                </tr>
+                <?php
+            $cnt++;
+             } ?>
+
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
-                                    <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Total Ads</h6>
-                                        <h2 class="m-t-0">2</h2></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
-                                    <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Trash</h6>
-                                        <h2 class="m-t-0">9</h2></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        </div>  
+                  
+                    <!-- Column -->
                 <!-- ============================================================== -->
               
                 <!-- ============================================================== -->
@@ -349,6 +366,12 @@ if (!isset($_SESSION['username'])) {
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+      <!-- jQuery peity -->
+    <script src="../assets/plugins/tablesaw-master/dist/tablesaw.js"></script>
+    <script src="../assets/plugins/tablesaw-master/dist/tablesaw-init.js"></script>
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
 </body>
 
 
