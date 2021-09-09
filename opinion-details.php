@@ -2,9 +2,6 @@
 session_start();
 include('admin/includes/conn.php');
 
-      $error ="";
-      $msg="";
-
 
 
 // time ago function  
@@ -48,13 +45,13 @@ if (isset($_POST['submit'])) {
       $postid = intval($_GET['nid']);
       $st1 = '0';
       $query = mysqli_query($con, "insert into tblcomments(postId,name,email,comment,status) values('$postid','$name','$email','$comment','$st1')");
-     
-      if ($query) {
-                $msg = "Comment added, Wait for admin approval ";
-                  unset($_SESSION['token']);
-            } else {
-                $error = "Something went wrong . Please try again.";
-            }
+      if ($query) :
+        echo "<script>alert('comment successfully submit. Comment will be display after admin review ');</script>";
+        unset($_SESSION['token']);
+      else :
+        echo "<script>alert('Something went wrong. Please try again.');</script>";
+
+      endif;
     }
   }
 }
@@ -136,7 +133,7 @@ if (isset($_POST['submit'])) {
                         <div class="single-post row">
                             <div class="col-lg-12">
 
-                <?php
+ <?php
                       if(isset($_GET['nid'])){
                                        
                   $pid=intval($_GET['nid']);
@@ -168,56 +165,34 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="comments-area">
                             <h4>Comments</h4>
-
-                             <div class="row">
-                                            <div class="col-sm-6">
-                                                <!---Success Message--->
-                                                <?php if ($msg) { ?>
-                                                    <div class="alert alert-success" role="alert">
-                                                        <strong>Well done!</strong> <?php echo htmlentities($msg); ?>
-                                                    </div>
-                                                <?php } ?>
-
-                                                <!---Error Message--->
-                                                <?php if ($error) { ?>
-                                                    <div class="alert alert-danger" role="alert">
-                                                        <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
-                                                    </div>
-                                                <?php } ?>
-
-
-                                            </div>
                             <div class="comment-list">
-                                            <?php 
+                                <div class="single-comment justify-content-between d-flex">
+                                    <div class="col">
+                                         <?php 
                                              $sts=1;
                                              $query=mysqli_query($con,"select name,comment,postingDate from  tblcomments where postId='$pid' and status='$sts'");
                                             while ($row=mysqli_fetch_array($query)) {
                                             ?>
-                                <div class="single-comment justify-content-between d-flex">
-                                    <div class="user justify-content-between d-flex">
-                                         
-                                        <div class="thumb">
+                                        <div class="thumb pt-4">
                                             <img src="img/user.png" alt="">
                                         </div>
                                         <div class="desc">
-                                            <h5><?php echo htmlentities($row['name']);?></h5>
-                                            <p class="date"> 
-                                                 <?php 
+                                           <h5><?php echo htmlentities($row['name']);?></h5>
+                                            <p class="date">
+
+                                                <?php 
                                                     $time =htmlentities($row['postingDate']);
                                                     
                                                     echo get_time_ago( strtotime (".$time."))  ?>
                                              </p>
                                             <p class="comment">
-                                                     <blockquote> <?php echo htmlentities($row['comment']);?> </blockquote>
+                                                  <blockquote class="generic-blockquote"> <?php echo htmlentities($row['comment']);?> </blockquote>
                                             </p>
                                         </div>
-                                           <?php } ?>
 
+                                      <?php } ?>
                                     </div>
 
-                                  
-
-                                     
                                 </div>
                             </div>		                                      				
                         </div>
@@ -273,24 +248,32 @@ if (isset($_POST['submit'])) {
                                 <div class="br"></div>
                             </aside>
                             <aside class="single_sidebar_widget post_category_widget">
+
+                                
                                 <h4 class="widget_title">Post Categories</h4>
                                 <ul class="list cat-list">
+                                    <?php 
+
+                                        $query=mysqli_query($con, "select * FROM tblcategory");
+
+                                        while ($row=(mysqli_fetch_array($query))) 
+                                                {
+
+                                 ?>
                                     <li>
                                         <a href="#" class="d-flex justify-content-between">
-                                            <p>Politics</p>
-                                            <p>12</p>
+                                            <?php echo $row['CategoryName'] ?>
+                                           
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#" class="d-flex justify-content-between">
-                                            <p>Education</p>
-                                            <p>15</p>
-                                        </a>
-                                    </li>
+
+                            <?php } ?>
+                                    
                                    
                                     															
                                 </ul>
                                 <div class="br"></div>
+
                             </aside>
                            
                            
