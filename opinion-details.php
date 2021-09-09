@@ -2,6 +2,9 @@
 session_start();
 include('admin/includes/conn.php');
 
+      $error ="";
+      $msg="";
+
 
 
 // time ago function  
@@ -45,13 +48,13 @@ if (isset($_POST['submit'])) {
       $postid = intval($_GET['nid']);
       $st1 = '0';
       $query = mysqli_query($con, "insert into tblcomments(postId,name,email,comment,status) values('$postid','$name','$email','$comment','$st1')");
-      if ($query) :
-        echo "<script>alert('comment successfully submit. Comment will be display after admin review ');</script>";
-        unset($_SESSION['token']);
-      else :
-        echo "<script>alert('Something went wrong. Please try again.');</script>";
-
-      endif;
+     
+      if ($query) {
+                $msg = "Comment added, Wait for admin approval ";
+                  unset($_SESSION['token']);
+            } else {
+                $error = "Something went wrong . Please try again.";
+            }
     }
   }
 }
@@ -133,7 +136,7 @@ if (isset($_POST['submit'])) {
                         <div class="single-post row">
                             <div class="col-lg-12">
 
- <?php
+                <?php
                       if(isset($_GET['nid'])){
                                        
                   $pid=intval($_GET['nid']);
@@ -165,20 +168,56 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="comments-area">
                             <h4>Comments</h4>
+
+                             <div class="row">
+                                            <div class="col-sm-6">
+                                                <!---Success Message--->
+                                                <?php if ($msg) { ?>
+                                                    <div class="alert alert-success" role="alert">
+                                                        <strong>Well done!</strong> <?php echo htmlentities($msg); ?>
+                                                    </div>
+                                                <?php } ?>
+
+                                                <!---Error Message--->
+                                                <?php if ($error) { ?>
+                                                    <div class="alert alert-danger" role="alert">
+                                                        <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                    </div>
+                                                <?php } ?>
+
+
+                                            </div>
                             <div class="comment-list">
+                                            <?php 
+                                             $sts=1;
+                                             $query=mysqli_query($con,"select name,comment,postingDate from  tblcomments where postId='$pid' and status='$sts'");
+                                            while ($row=mysqli_fetch_array($query)) {
+                                            ?>
                                 <div class="single-comment justify-content-between d-flex">
                                     <div class="user justify-content-between d-flex">
+                                         
                                         <div class="thumb">
-                                            <img src="img/blog/c1.jpg" alt="">
+                                            <img src="img/user.png" alt="">
                                         </div>
                                         <div class="desc">
-                                            <h5><a href="#">Panji</a></h5>
-                                            <p class="date">August 4, 2021 at 3:12 pm </p>
+                                            <h5><?php echo htmlentities($row['name']);?></h5>
+                                            <p class="date"> 
+                                                 <?php 
+                                                    $time =htmlentities($row['postingDate']);
+                                                    
+                                                    echo get_time_ago( strtotime (".$time."))  ?>
+                                             </p>
                                             <p class="comment">
-                                                This is great!
+                                                     <blockquote> <?php echo htmlentities($row['comment']);?> </blockquote>
                                             </p>
                                         </div>
+                                           <?php } ?>
+
                                     </div>
+
+                                  
+
+                                     
                                 </div>
                             </div>		                                      				
                         </div>
