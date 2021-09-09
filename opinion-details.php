@@ -161,6 +161,7 @@ if (isset($_POST['submit'])) {
                                     <?php }     } 
                        ?>
                             </div>
+
                         </div>
                         <div class="comments-area">
                             <h4>Comments</h4>
@@ -183,22 +184,24 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="comment-form">
                             <h4>Leave a Reply</h4>
-                            <form>
+                            <form name="Comment" method="post">
+                                 <input type="hidden" name="csrftoken" value="<?php echo htmlentities($_SESSION['token']); ?>" />
+
                                 <div class="form-group form-inline">
                                   <div class="form-group col-lg-6 col-md-6 name">
-                                    <input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
                                   </div>
                                   <div class="form-group col-lg-6 col-md-6 email">
-                                    <input type="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
                                   </div>										
                                 </div>
+                                
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
+                                    <textarea class="form-control mb-10" rows="5" name="comment" placeholder="Comment" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
                                 </div>
-                                <div class="form-group">
-                                    <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-                                </div>
-                                <a href="#" class="primary-btn submit_btn">Post Comment</a>	
+
+                                   <button type="submit" class="submit_btn" name="submit">Post Comment</button>
+                             
                             </form>
                         </div>
                     </div>
