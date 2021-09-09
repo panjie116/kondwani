@@ -1,3 +1,63 @@
+<?php
+session_start();
+include('admin/includes/conn.php');
+
+
+
+// time ago function  
+function get_time_ago( $time )
+{
+    $time_difference = time() - $time;
+
+    if( $time_difference < 1 ) { return 'less than 1 second ago'; }
+    $condition = array( 12 * 30 * 24 * 60 * 60 =>  'year',
+                30 * 24 * 60 * 60       =>  'month',
+                24 * 60 * 60            =>  'day',
+                60 * 60                 =>  'hour',
+                60                      =>  'minute',
+                1                       =>  'second'
+    );
+
+    foreach( $condition as $secs => $str )
+    {
+        $d = $time_difference / $secs;
+
+        if( $d >= 1 )
+        {
+            $t = round( $d );
+            return 'about ' . $t . ' ' . $str . ( $t > 1 ? 's' : '' ) . ' ago';
+        }
+    }
+} 
+
+//Generating CSRF Token
+if (empty($_SESSION['token'])) {
+  $_SESSION['token'] = bin2hex(random_bytes(32));
+}
+
+if (isset($_POST['submit'])) {
+  //Verifying CSRF Token
+  if (!empty($_POST['csrftoken'])) {
+    if (hash_equals($_SESSION['token'], $_POST['csrftoken'])) {
+      $name = $_POST['name'];
+      $email = $_POST['email'];
+      $comment = $_POST['comment'];
+      $postid = intval($_GET['nid']);
+      $st1 = '0';
+      $query = mysqli_query($con, "insert into tblcomments(postId,name,email,comment,status) values('$postid','$name','$email','$comment','$st1')");
+      if ($query) :
+        echo "<script>alert('comment successfully submit. Comment will be display after admin review ');</script>";
+        unset($_SESSION['token']);
+      else :
+        echo "<script>alert('Something went wrong. Please try again.');</script>";
+
+      endif;
+    }
+  }
+}
+?>
+
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -55,8 +115,8 @@
 					<div class="banner_content text-center">
 						<h2>OPINION DETAILS</h2>
 						<div class="page_link">
-							<a href="index.html">Home</a>
-							<a href="comment-details.html">OPINION DETAILS</a>
+							<a href="index.php">Home</a>
+							<a href="#">OPINION DETAILS</a>
 						</div>
 						
 					</div>
@@ -72,23 +132,34 @@
                     <div class="col-lg-8 posts-list">
                         <div class="single-post row">
                             <div class="col-lg-12">
+
+ <?php
+                      if(isset($_GET['nid'])){
+                                       
+                  $pid=intval($_GET['nid']);
+                  $currenturl="http://".$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];;
+                   $query=mysqli_query($con,"select * FROM tblposts where tblposts.id='$pid'");
+                  while ($row=mysqli_fetch_array($query)) {
+                  ?>
                                 
                                 <div class="row">
-                                      <h2>Astronomy Binoculars A Great Alternative</h2>
-                                    <div class="col-6">
-                                        <img class="img-fluid" src="img/p2.jpg" alt="">
-                                    </div>	
+                                      <h2> <?php echo $row['PostTitle']; ?> </h2>
+                                    
 
 
                                     <div class="col-lg-12 mt-25">
+                                        <div class="col-6">
+                                               
+                                                 <img class="img-center" src="admin/postimages/<?php echo htmlentities($row['PostImage']);?>" alt="">
+                                         </div>  
                                         <p>
-                                            MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower.
+                                           <?php echo $row['PostDetails']; ?> 
                                         </p>
-                                        <p>
-                                            MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower.
-                                        </p>											
+                                        											
                                     </div>									
                                 </div>
+                                    <?php }     } 
+                       ?>
                             </div>
                         </div>
                         <div class="comments-area">

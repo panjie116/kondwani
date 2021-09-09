@@ -148,13 +148,13 @@ include 'admin/includes/conn.php'
         			<div class="col-lg-3">
         				<div class="l_blog_item">
         					<div class="l_blog_img">
-        						 <a href="news-details.php?nid=<?php echo htmlentities($row['id']) ?>"><img src="admin/postimages/<?php echo htmlentities($row['PostImage']); ?>" alt="<?php echo htmlentities($row['PostImage']);  ?>" width="230" height="180"></a>
+        						 <a href="opinion-details.php?nid=<?php echo htmlentities($row['id']) ?>"><img src="admin/postimages/<?php echo htmlentities($row['PostImage']); ?>" alt="<?php echo htmlentities($row['PostImage']);  ?>" width="230" height="180"></a>
         					</div>
         					<div class="l_blog_text">
         						<div class="date">
-        							<a href="#">  <?php  echo $row['PostingDate']; ?>  |  By Kondwani</a>
+        							<a href=>  <?php  echo $row['PostingDate']; ?>  |  By Kondwani</a>
         						</div>
-        						<a href="#"><h4> <?php  echo $row['PostTitle']; ?> </h4></a>
+        						<a href="opinion-details.php?nid=<?php echo htmlentities($row['id']) ?>"><h4> <?php  echo $row['PostTitle']; ?> </h4></a>
         						
         					</div>
         				</div>
