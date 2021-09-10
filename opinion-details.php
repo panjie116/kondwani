@@ -237,13 +237,31 @@ if (isset($_POST['submit'])) {
                            
                             <aside class="single_sidebar_widget popular_post_widget">
                                 <h3 class="widget_title">Latest Posts</h3>
+                                <?php 
+
+                                $query = mysqli_query($con, "select * FROM tblposts ORDER BY id DESC Limit 4");
+
+                                while ($row=mysqli_fetch_array($query))
+                                        {
+
+                                 ?>
                                 <div class="media post_item">
-                                    <img src="img/p.jpg" alt="post">
+                                    <img src="admin/postimages/<?php echo $row['PostImage']  ?>" alt="post" width="50px"; >
                                     <div class="media-body">
-                                        <a href="blog-details.html"><h3>Malawi is nice</h3></a>
-                                        <p>02 Hours ago</p>
+                                        <a href="opinion-details.php?nid=<?php echo htmlentities($row['id'])?>"><h3> <?php echo $row['PostTitle'] ?> </h3></a>
+                                       
+                                            <p class="date">
+
+                                                <?php 
+                                                    $time =htmlentities($row['PostingDate']);
+                                                    
+                                                    echo get_time_ago( strtotime (".$time."))  ?>
+                                             </p>
+                                        
                                     </div>
                                 </div>
+
+                                <?php } ?>
                                
                                 <div class="br"></div>
                             </aside>
