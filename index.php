@@ -27,7 +27,12 @@ include 'admin/includes/conn.php'
         <!-- main css -->
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/responsive.css">
-    </head>
+	        <!-- Animate.css -->
+		<link rel="stylesheet" href="css/animate.css">
+		  <link href="css/aos.css" rel="stylesheet">
+		<!-- Icomoon Icon Fonts-->
+		<link rel="stylesheet" href="css/icomoon.css">
+	    </head>
     <body>
         
         <!--================Header Menu Area =================-->
@@ -162,8 +167,12 @@ include 'admin/includes/conn.php'
 
 	<?php } ?>
         		</div>
+
+        			
         	
         	</div>
+
+        	
 
         	 
         </section>
@@ -171,42 +180,48 @@ include 'admin/includes/conn.php'
         
         <!--================Feature Area =================-->
         <section class="feature_area p_120" id="autobiography">
-        	 <div class="container">
-				    <div class="section-title center">
-				      <h2>Autobiography</h2>
-				      <hr>
-				    </div>
-				    <div class="row">
-				      <div class="col-lg-12">
-				      	<?php
-        			  $query = mysqli_query($con, "select * FROM tblupdates where tblupdates.Is_Active=1 LIMIT 4 ");
+        	<div class="container">
+					<div class="main_title">
+						<h2>Auto-biography</h2>
+					</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2 col-md-12 col-lg-6">
+				         <div class="timeline-centered">
+				         		<?php
+				        			  $query = mysqli_query($con, "select * FROM tblupdates where tblupdates.Is_Active=1 LIMIT 4 ");
 
-        			  	while ($row=mysqli_fetch_array($query)) {
-        			  		
-        			 
-        			  ?> 
-				        <ul class="timeline">
-				          <li>
-				            <div class="timeline-image">
-				              <h4>  </h4>
-				            </div>
-				            <div class="timeline-panel">
-				              <div class="timeline-heading">
-				                <h4> <a href="#"><h4> <?php  echo $row['PostTitle']; ?> </h4></a> </h4>
-				                <h4 class="subheading"> <?php echo $row['PostingDate'] ?> </h4>
-				              </div>
-				              <div class="timeline-body">
-				                <p><?php echo $row['PostDetails'] ?></p>
-				              </div>
-				            </div>
-				          </li>
+				        			  	while ($row=mysqli_fetch_array($query)) {
+				        			  		
+				        			 
+				        			  ?> 
+					         <article class="timeline-entry" data-aos="fade-left">
+					            <div class="timeline-entry-inner">
 
-				        </ul>
+					               <div class="timeline-icon color-1">
+					                  <i class="icon-pen2"></i>
+					               </div>
 
-				        	<?php } ?>
-				      </div>
-				    </div>
-				  </div>
+					               <div class="timeline-label">
+					                  <h2><a href="#"> <?php  echo $row['PostTitle']; ?></a></h2>
+					                  <h4> <?php echo $row['PostingDate'] ?></h4>
+					                  <p><?php echo $row['PostDetails'] ?></p>
+					               </div>
+					            </div>
+					         </article>
+					         	<?php } ?>
+
+					        
+
+					         <article class="timeline-entry begin animate-box" data-animate-effect="fadeInBottom">
+					            <div class="timeline-entry-inner">
+					               <div class="timeline-icon color-none">
+					               </div>
+					            </div>
+					         </article>
+					      </div>
+					   </div>
+					    </div>
 				</div>
         </section>
         <!--================End Feature Area =================-->
@@ -358,5 +373,17 @@ include 'admin/includes/conn.php'
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
         <script src="js/gmaps.min.js"></script>
         <script src="js/theme.js"></script>
+         <script src="js/aos.js"></script>
+
+
+         <script>
+		    $(function() {
+		    AOS.init();
+		  });
+
+		  $(window).on('load', function() {
+		    AOS.refresh();
+		  });
+		  </script>
     </body>
 </html>
