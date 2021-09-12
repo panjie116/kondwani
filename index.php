@@ -203,7 +203,7 @@ include 'admin/includes/conn.php'
 					               </div>
 
 					               <div class="timeline-label">
-					                  <h2><a href="#"> <?php  echo $row['PostTitle']; ?></a></h2>
+					                  <h2><a href="bio-details.php?bid=<?php echo htmlentities($row['id']) ?>"> <?php  echo $row['PostTitle']; ?></a></h2>
 					                  <h4> <?php echo $row['PostingDate'] ?></h4>
 					                  <p><?php echo $row['PostDetails'] ?></p>
 					               </div>
@@ -243,9 +243,9 @@ include 'admin/includes/conn.php'
 				        			 
 				        			  ?> 
 						<div class="item">
-							<div class="testi_item">
-								<div >
-								 <a href="<?php echo htmlentities($row['Link']) ?>"><img src="admin/postimages/<?php echo htmlentities($row['PostImage']); ?>" alt="<?php echo htmlentities($row['PostImage']);  ?>" width="230" height="180"></a>
+							<div  class="testi_item">
+								<div id= "link_other" >
+								 <a target="blank" href="https://www.<?php echo htmlentities($row['Link']) ?>"><img src="admin/postimages/<?php echo htmlentities($row['PostImage']); ?>" alt="<?php echo htmlentities($row['PostImage']);  ?>" width="230" height="180"></a>
 								
 							</div>
 							</div>
@@ -383,5 +383,16 @@ include 'admin/includes/conn.php'
 			        $(".navbar-collapse").collapse('hide');
 			    });
 			</script>
+
+			  <script>
+
+				window.onload = function(){
+				  var anchors = document.getElementById('link_other').getElementsByTagName('a');
+				  for (var i=0; i<anchors.length; i++){
+				    anchors[i].setAttribute('target', '_blank');
+				  }
+				}
+
+				  </script>
     </body>
 </html>
