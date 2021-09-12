@@ -385,5 +385,11 @@ include 'admin/includes/conn.php'
 		    AOS.refresh();
 		  });
 		  </script>
+
+		  <script>
+			    $(".navbar-collapse a").click(function(){
+			        $(".navbar-collapse").collapse('hide');
+			    });
+			</script>
     </body>
 </html>
