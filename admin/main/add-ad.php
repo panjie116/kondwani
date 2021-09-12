@@ -11,12 +11,11 @@ if (!isset($_SESSION['username'])) {
       $msg="";
 
      if (isset($_POST['submit'])) {
-        $posttitle = $_POST['posttitle'];
-        $catid = $_POST['category'];
-        $postdetails = $_POST['postdescription'];
-        $arr = explode(" ", $posttitle);
+        $title = $_POST['title'];
+        $link = $_POST['link'];
+        $arr = explode(" ", $title);
         $url = implode("-", $arr);
-        $imgfile = $_FILES["postimage"]["name"];
+        $imgfile = $_FILES["image"]["name"];
         // get the image extension
         $extension = substr($imgfile, strlen($imgfile) - 4, strlen($imgfile));
         // allowed extensions
@@ -28,12 +27,12 @@ if (!isset($_SESSION['username'])) {
             //rename the image file
             $imgnewfile = md5($imgfile) . $extension;
             // Code for move image into directory
-            move_uploaded_file($_FILES["postimage"]["tmp_name"], "../postimages/" . $imgnewfile);
+            move_uploaded_file($_FILES["image"]["tmp_name"], "../postimages/" . $imgnewfile);
 
             $status = 1;
-            $query = mysqli_query($con, "insert into tblposts(PostTitle,CategoryId,PostDetails,PostUrl,Is_Active,PostImage) values('$posttitle','$catid','$postdetails','$url','$status','$imgnewfile')");
+            $query = mysqli_query($con, "insert into tblads(Title,Link,PostUrl,Is_Active,PostImage) values('$title','$link','$url','$status','$imgnewfile')");
             if ($query) {
-                $msg = "Post successfully added ";
+                $msg = "Ad successfully added ";
             } else {
                 $error = "Something went wrong . Please try again.";
             }
@@ -299,12 +298,12 @@ if (!isset($_SESSION['username'])) {
                                         <form name="addpost" method="post" enctype="multipart/form-data">
                                             <div class="form-group m-b-20">
                                                 <label for="exampleInputEmail1">Advertisement heading</label>
-                                                <input type="text" class="form-control" id="posttitle" name="posttitle" placeholder="Enter title" required>
+                                                <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
                                             </div>
 
                                              <div class="form-group m-b-20">
-                                                <label for="exampleInputEmail1">Ad heading</label>
-                                                <input type="text" class="form-control" id="postlink" name="postlink" placeholder="Enter link" required>
+                                                <label for="exampleInputEmail1">Ad Link</label>
+                                                <input type="text" class="form-control" id="link" name="link" placeholder="Enter link" required>
                                             </div>
 
 
@@ -312,7 +311,7 @@ if (!isset($_SESSION['username'])) {
                                                 <div class="col-sm-12">
                                                     <div class="card-box">
                                                         <h4 class="m-b-30 m-t-0 header-title"><b>Feature Image</b></h4>
-                                                        <input type="file" class="form-control" id="postimage" name="postimage" required>
+                                                        <input type="file" class="form-control" id="image" name="image" required>
                                                     </div>
                                                 </div>
                                             </div>
