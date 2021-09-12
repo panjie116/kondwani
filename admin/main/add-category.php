@@ -196,27 +196,43 @@ if (!isset($_SESSION['username'])) {
                         <li> <a class="has-arrow waves-effect waves-dark active" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home <span class="label label-rouded label-themecolor pull-right">3</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="dashboard.php">Dashboard </a></li>
-                                <li><a class="active" href="#">Profile</a></li>
+                                <li><a  href="profile.php">Profile</a></li>
                                 <li><a href="settings.php">Settings</a></li>
                             </ul>
                         </li>
-                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Categories <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
+                          </li>
+                          <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Categories <span class="label label-rouded label-themecolor pull-right">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="add-category.php">Add category</a></li>
                                 <li><a href="list-categories.php">List Categories</a></li>
                             </ul>
                         </li>
-
-
-                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Posts <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
+                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Posts <span class="label label-rouded label-themecolor pull-right">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="add-post.php">Add Post </a></li>
-                                <li><a class="active" href="#">View Posts </a></li>
+                                <li><a href="add-post.php">Add Post</a></li>
+                                <li><a href="list-posts.php">List Posts</a></li>
                             </ul>
                         </li>
-                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Ads <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
+
+
+                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Auto-Biography<span class="label label-rouded label-themecolor pull-right">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="index.html">Posts </a></li>
+                                <li><a href="add-update.php">Add update</a></li>
+                                <li><a href="list-posts.php">List updates</a></li>
+                            </ul>
+                        </li>
+
+                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Comments<span class="label label-rouded label-themecolor pull-right">2</span></span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="unapproved.php">To-be approved</a></li>
+                                <li><a href="approved.php">Approved</a></li>
+                            </ul>
+                        </li>
+
+                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Ads <span class="label label-rouded label-themecolor pull-right">2</span></span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="add-ad.php">Add Ad</a></li>
+                                 <li><a href="manage-adds.php">Manage Ads</a></li>
                             </ul>
                         </li>
                        
