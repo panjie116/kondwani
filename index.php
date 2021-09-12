@@ -235,31 +235,23 @@ include 'admin/includes/conn.php'
         		</div>
         		<div class="testi_inner">
 					<div class="testi_slider owl-carousel">
+								<?php
+				        			  $query = mysqli_query($con, "select * FROM tblads where tblads.Is_Active=1 LIMIT 4 ");
+
+				        			  	while ($row=mysqli_fetch_array($query)) {
+				        			  		
+				        			 
+				        			  ?> 
 						<div class="item">
 							<div class="testi_item">
 								<div >
-								<a href="img/p2.jpg" class="img-gal"><div class="single-gallery-image" style="background: url(img/p2.jpg);"></div></a>
-								<h4>Ads 1</h4>
-							</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testi_item">
-								<div >
-								<a href="img/p2.jpg" class="img-gal"><div class="single-gallery-image" style="background: url(img/p2.jpg);"></div></a>
-								<h4>Ad2</h4>
-							</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testi_item">
-								<div >
-								<a href="img/p2.jpg" class="img-gal"><div class="single-gallery-image" style="background: url(img/p2.jpg);"></div></a>
-								<h4>Ads3</h4>
+								 <a href="<?php echo htmlentities($row['Link']) ?>"><img src="admin/postimages/<?php echo htmlentities($row['PostImage']); ?>" alt="<?php echo htmlentities($row['PostImage']);  ?>" width="230" height="180"></a>
+								
 							</div>
 							</div>
 						</div>
 						
+						<?php } ?>
 					</div>
         		</div>
         	</div>
