@@ -5,27 +5,20 @@ error_reporting(0);
 session_start();
 if (!isset($_SESSION['username'])) {
     header('location:../index.php');
-} else{
-if($_GET['action']=='del' && $_GET['rid'])
+}else{
+if(isset($_POST['submit']))
 {
-    $id=intval($_GET['rid']);
-    $query=mysqli_query($con,"update tblcategory set Is_Active='0' where id='$id'");
-    $msg="Category deleted ";
+    $catid=intval($_GET['cid']);
+    $category=$_POST['category'];
+    $description=$_POST['description'];
+    $query=mysqli_query($con,"Update  tblcategory set CategoryName='$category',Description='$description' where id='$catid'");
+if($query)
+{
+    $msg="Category Updated successfully ";
 }
-// Code for restore
-if($_GET['resid'])
-{
-    $id=intval($_GET['resid']);
-    $query=mysqli_query($con,"update tblcategory set Is_Active='1' where id='$id'");
-    $msg="Category restored successfully";
-}
-
-// Code for Forever deletionparmdel
-if($_GET['action']=='parmdel' && $_GET['rid'])
-{
-    $id=intval($_GET['rid']);
-    $query=mysqli_query($con,"delete from  tblcategory  where id='$id'");
-    $delmsg="Category deleted forever";
+else{
+        $error="Something went wrong . Please try again.";    
+    } 
 }
  ?>
 
@@ -266,7 +259,7 @@ if($_GET['action']=='parmdel' && $_GET['rid'])
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor"> List Categories</h3>
+                        <h3 class="text-themecolor"> Edit Category</h3>
                     </div>
                    
                     
@@ -287,49 +280,88 @@ if($_GET['action']=='parmdel' && $_GET['rid'])
                         <!-- Column -->
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Categories list</h4>
-                                <table class="tablesaw table-bordered table-hover table" data-tablesaw-mode="swipe" data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap data-tablesaw-mode-switch>
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Category Title</th>
-                                            <th scope="col" data-tablesaw-sortable-col  data-tablesaw-priority="3">Description</th>
-                                            <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="2">Date Added</th>
-                                            <th scope="col"  data-tablesaw-priority="4">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                       
-                                        <?php
-                                                $query = mysqli_query($con, "select * FROM tblcategory where tblcategory.Is_Active=1 ");
-                                                $rowcount = mysqli_num_rows($query);
-                                                if ($rowcount == 0) {
-                                                ?>
-                                                    <tr>
+                                <h4 class="card-title">Edit category</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">  
+                                    <!---Success Message--->  
+                                    <?php if($msg){ ?>
+                                    <div class="alert alert-success" role="alert">
+                                    <strong>Well done!</strong> <?php echo htmlentities($msg);?>
+                                    </div>
+                                    <?php } ?>
 
-                                                        <td colspan="4" align="center">
-                                                            <h3 style="color:red">No record found</h3>
-                                                        </td>
-                                                    <tr>
-                                                        <?php
-                                                    } else {
-                                                        while ($row = mysqli_fetch_array($query)) {
-                                                        ?>
-                                                    <tr>
-                                                        <td><b><?php echo htmlentities($row['CategoryName']); ?></b></td>
-                                                        <td><?php echo htmlentities($row['Description']) ?></td>
-                                                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> <?php echo htmlentities($row['PostingDate']) ?> </span> </td>
+                                    <!---Error Message--->
+                                    <?php if($error){ ?>
+                                    <div class="alert alert-danger" role="alert">
+                                    <strong>Oh snap!</strong> <?php echo htmlentities($error);?></div>
+                                    <?php } ?>
 
-                                                    <td class="text-nowrap">
-                                                        <a href="edit-category.php?cid=<?php echo htmlentities($row['id']);?>" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                                        <a href="list-categories.php?rid=<?php echo htmlentities($row['id']);?>&&action=del" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i> </a>
-                                                    </td>
-                                                    </tr>
-                                            <?php }
-                                                    } ?>
 
-                                    </tbody>
-                                </table>
+                                    </div>
+                                </div>
+
+                                    <?php 
+                                    $catid=intval($_GET['cid']);
+                                    $query=mysqli_query($con,"Select id,CategoryName,Description,PostingDate,UpdationDate from  tblcategory where Is_Active=1 and id='$catid'");
+                                    $cnt=1;
+                                    while($row=mysqli_fetch_array($query))
+                                    {
+                                    ?>
+
+
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <form class="form-horizontal" name="category" method="post">
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label">Category</label>
+                                                    <div class="col-md-10">
+                                                        <input type="text" class="form-control" value="<?php echo htmlentities($row['CategoryName']);?>" name="category" required>
+                                                    </div>
+                                                </div>
+                                         
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label">Category Description</label>
+                                                    <div class="col-md-10">
+                                                     <textarea class="form-control" rows="5" name="description" required><?php echo htmlentities($row['Description']);?></textarea>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                    <?php } ?>
+                                                            <div class="form-group">
+                                                    <label class="col-md-2 control-label">&nbsp;</label>
+                                                    <div class="col-md-10">
+                                                  
+                                                <button type="submit" class="btn btn-success" name="submit">
+                                                    Update
+                                                </button>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+
+
+                                    </div>
+
+
+                                    
+
+
+
+
+           
+                       
+
+
+                                </div>
                             </div>
+                        </div>
+                        <!-- end row -->
+                                
+                            </div>
+
+
                         </div>  
                   
                     <!-- Column -->

@@ -195,20 +195,19 @@ include 'admin/includes/conn.php'
 				        			  		
 				        			 
 				        			  ?> 
-					         <article class="timeline-entry" data-aos="fade-left">
-					            <div class="timeline-entry-inner">
 
-					               <div class="timeline-icon color-1">
-					                  <i class="icon-pen2"></i>
-					               </div>
 
-					               <div class="timeline-label">
-					                  <h2><a href="bio-details.php?bid=<?php echo htmlentities($row['id']) ?>"> <?php  echo $row['PostTitle']; ?></a></h2>
-					                  <h4> <?php echo $row['PostingDate'] ?></h4>
-					                  <p><?php echo $row['PostDetails'] ?></p>
-					               </div>
-					            </div>
-					         </article>
+								<div class="">
+									<ul class="unordered-list">
+										<li><a href="bio-details.php?bid=<?php echo htmlentities($row['id']) ?>"> <?php  echo $row['PostTitle']; ?></a>
+											  <h4> <?php echo $row['PostingDate'] ?></h4>
+					                  	<p><?php echo $row['PostDetails'] ?></p>
+
+										</li>
+										
+									</ul>
+								</div>
+					         
 					         	<?php } ?>
 
 					        
