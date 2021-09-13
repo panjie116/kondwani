@@ -148,7 +148,7 @@ if (isset($_POST['submit'])) {
                                     <div class="col-lg-12 mt-25">
                                         <div class="col-6">
                                                
-                                                 <img class="img-center" src="admin/postimages/<?php echo htmlentities($row['PostImage']);?>" alt="">
+                                                 <img class="img-fluid" src="admin/postimages/<?php echo htmlentities($row['PostImage']);?>" alt="">
                                          </div>  
                                         <p>
                                            <?php echo $row['PostDetails']; ?> 
