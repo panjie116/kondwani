@@ -202,7 +202,7 @@ if (!isset($_SESSION['username'])) {
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Auto-Biography<span class="label label-rouded label-themecolor pull-right">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="add-update.php">Add update</a></li>
-                                <li><a href="list-posts.php">List updates</a></li>
+                                <li><a href="list-updates.php">List updates</a></li>
                             </ul>
                         </li>
 
@@ -263,8 +263,11 @@ if (!isset($_SESSION['username'])) {
                                 <div class="d-flex no-block">
                                     <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
                                     <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Total opinion</h6>
-                                        <h2 class="m-t-0">23</h2></div>
+                                        <h6 class="text-muted m-t-10 m-b-0">Total opinions</h6>
+                                        <h2 class="m-t-0"><?php $query=mysqli_query($con,"select * from tblposts where Is_Active=1");
+                                                                            $countcat=mysqli_num_rows($query);
+
+                                                ?> <?php echo htmlentities($countcat) ?></h2>  </div>
                                 </div>
                             </div>
                         </div>
@@ -275,8 +278,11 @@ if (!isset($_SESSION['username'])) {
                                 <div class="d-flex no-block">
                                     <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
                                     <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Total Ads</h6>
-                                        <h2 class="m-t-0">2</h2></div>
+                                        <h6 class="text-muted m-t-10 m-b-0">Total Auto-bio posts</h6>
+                                        <h2 class="m-t-0"><?php $query=mysqli_query($con,"select * from tblupdates where Is_Active=1");
+                                                                            $countcat2=mysqli_num_rows($query);
+
+                                                ?> <?php echo htmlentities($countcat2) ?></h2></div>
                                 </div>
                             </div>
                         </div>
@@ -287,8 +293,11 @@ if (!isset($_SESSION['username'])) {
                                 <div class="d-flex no-block">
                                     <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
                                     <div class="align-self-center">
-                                        <h6 class="text-muted m-t-10 m-b-0">Trash</h6>
-                                        <h2 class="m-t-0">9</h2></div>
+                                        <h6 class="text-muted m-t-10 m-b-0">Total Advertisements</h6>
+                                        <h2 class="m-t-0"><?php $query=mysqli_query($con,"select * from tblads where Is_Active=1");
+                                                                            $countcat3=mysqli_num_rows($query);
+
+                                                ?> <?php echo htmlentities($countcat3) ?></h2></div>
                                 </div>
                             </div>
                         </div>
