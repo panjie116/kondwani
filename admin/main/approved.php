@@ -1,30 +1,25 @@
 <?php 
 include '../includes/conn.php';
-//error_reporting(0);
+error_reporting(0);
 session_start();
 if (!isset($_SESSION['username'])) {
     header('location:../index.php');
 } else{
-if( $_GET['disid'])
+if($_GET['action']=='dis' && $_GET['disid'])
 {
     $id=intval($_GET['disid']);
     $query=mysqli_query($con,"update tblcomments set status='0' where id='$id'");
     $msg="Comment unapproved";
 }
 // Code for restore
-if($_GET['appid'])
-{
-    $id=intval($_GET['appid']);
-    $query=mysqli_query($con,"update tblcomments set status='1' where id='$id'");
-    $msg="Comment approved";
-}
+
 
 // Code for deletion
 if($_GET['action']=='del' && $_GET['rid'])
 {
     $id=intval($_GET['rid']);
     $query=mysqli_query($con,"delete from  tblcomments  where id='$id'");
-    $delmsg="Comment deleted forever";
+    $msg="Comment deleted forever";
 }
 
 
@@ -288,6 +283,24 @@ if($_GET['action']=='del' && $_GET['rid'])
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Comments List</h4>
+
+                                <div class="col-sm-6">
+                                                <!---Success Message--->
+                                                <?php if ($msg) { ?>
+                                                    <div class="alert alert-success" role="alert">
+                                                        <strong>Well done!</strong> <?php echo htmlentities($msg); ?>
+                                                    </div>
+                                                <?php } ?>
+
+                                                <!---Error Message--->
+                                                <?php if ($error) { ?>
+                                                    <div class="alert alert-danger" role="alert">
+                                                        <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                    </div>
+                                                <?php } ?>
+
+
+                                            </div>
                                 <table class="tablesaw table-bordered table-hover table"  data-tablesaw-mode="swipe" data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap data-tablesaw-mode-switch>
                                     <thead>
                                         <tr>
@@ -334,13 +347,13 @@ if($_GET['action']=='del' && $_GET['rid'])
                 <td><a href="edit-post.php?pid=<?php echo htmlentities($row['postid']);?>"><?php echo htmlentities($row['PostTitle']);?></a> </td>
                 <td><?php echo htmlentities($row['postingDate']);?></td>
                 <td>
-                <?php if($st=='0'):?>
-                    <a href="unapprove-comment.php?disid=<?php echo htmlentities($row['id']);?>" title="Disapprove this comment"><i class="fa fa-trash-o" style="color: #29b6f6;"></i></a> 
+                <?php if($st=='1'):?>
+                    <a href="approved.php?disid=<?php echo htmlentities($row['id']);?>&&action=dis" title="Disapprove this comment"><i class="fa fa-close text-danger" style="color: #29b6f6;"></i></a> 
                 <?php else :?>
-                  <a href="unapprove-comment.php?appid=<?php echo htmlentities($row['id']);?>" title="Approve this comment"><i class="fa fa-trash-o" style="color: green;"></i></a> 
+                  <a href="approved.php?appid=<?php echo htmlentities($row['id']);?>" title="Approve this comment"><i class="fa fa-trash-o" style="color: green;"></i></a> 
                 <?php endif;?>
 
-                    &nbsp;<a href="unapprove-comment.php?rid=<?php echo htmlentities($row['id']);?>&&action=del"> <i class="fa fa-trash-o" style="color: #f05050"></i></a> </td>
+                    &nbsp;<a href="approved.php?rid=<?php echo htmlentities($row['id']);?>&&action=del" title="Delete this comment"> <i class="fa fa-trash-o" style="color: #f05050"></i></a> </td>
                 </tr>
                 <?php
             $cnt++;
