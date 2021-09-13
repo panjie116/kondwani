@@ -197,7 +197,7 @@ else{
                         <li> <a class="has-arrow waves-effect waves-dark active" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home <span class="label label-rouded label-themecolor pull-right">3</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="dashboard.php">Dashboard </a></li>
-                                <li><a href="#">Profile</a></li>
+                                <li><a href="profile.php">Profile</a></li>
                                 <li><a href="setting.php">Settings</a></li>
                             </ul>
                         </li>

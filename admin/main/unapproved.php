@@ -1,10 +1,25 @@
 <?php 
 include '../includes/conn.php';
-//error_reporting(0);
+error_reporting(0);
 session_start();
 if (!isset($_SESSION['username'])) {
     header('location:../index.php');
-} else {
+} else{
+if( $_GET['action']=='app' && $_GET['appid'])
+{
+    $id=intval($_GET['appid']);
+    $query=mysqli_query($con,"update tblcomments set status='1' where id='$id'");
+    $msg="Comment Approved";
+}
+
+
+// Code for deletion
+if($_GET['action']=='del' && $_GET['rid'])
+{
+    $id=intval($_GET['rid']);
+    $query=mysqli_query($con,"delete from  tblcomments  where id='$id'");
+    $msg="Comment deleted forever";
+}
 
 
 
@@ -269,6 +284,24 @@ if (!isset($_SESSION['username'])) {
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Comments List</h4>
+                                 <div class="row">
+                                            <div class="col-sm-6">
+                                                <!---Success Message--->
+                                                <?php if ($msg) { ?>
+                                                    <div class="alert alert-success" role="alert">
+                                                        <strong>Well done!</strong> <?php echo htmlentities($msg); ?>
+                                                    </div>
+                                                <?php } ?>
+
+                                                <!---Error Message--->
+                                                <?php if ($error) { ?>
+                                                    <div class="alert alert-danger" role="alert">
+                                                        <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                    </div>
+                                                <?php } ?>
+
+
+                                            </div>
                                 <table class="tablesaw table-bordered table-hover table" data-tablesaw-mode="swipe" data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap data-tablesaw-mode-switch>
                                     <thead>
                                         <tr>
@@ -316,12 +349,12 @@ if (!isset($_SESSION['username'])) {
                 <td><?php echo htmlentities($row['postingDate']);?></td>
                 <td>
                 <?php if($st=='0'):?>
-                    <a href="unapprove-comment.php?disid=<?php echo htmlentities($row['id']);?>" title="Disapprove this comment"><i class="fa fa-trash-o" style="color: #29b6f6;"></i></a> 
+                    <a onclick="are you sure you want?" href="unapproved.php?appid=<?php echo htmlentities($row['id']);?>&&action=app" title="Approve this comment"><i class="fa fa-check" style="color: #green;"></i></a> 
                 <?php else :?>
-                  <a href="unapprove-comment.php?appid=<?php echo htmlentities($row['id']);?>" title="Approve this comment"><i class="fa fa-trash-o" style="color: green;"></i></a> 
+                  <a href="unapproved.php?appid=<?php echo htmlentities($row['id']);?>" title="Disapprove this comment"><i class="fa fa-trash o" style="color: red;"></i></a> 
                 <?php endif;?>
 
-                    &nbsp;<a href="unapprove-comment.php?rid=<?php echo htmlentities($row['id']);?>&&action=del"> <i class="fa fa-trash-o" style="color: #f05050"></i></a> </td>
+                    &nbsp;<a  href="unapproved.php?rid=<?php echo htmlentities($row['id']);?>&&action=del"  title="Delete this comment"> <i class="fa fa-trash-o" style="color: #f05050"></i></a> </td>
                 </tr>
                 <?php
             $cnt++;

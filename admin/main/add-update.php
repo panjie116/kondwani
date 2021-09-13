@@ -240,7 +240,7 @@ if (!isset($_SESSION['username'])) {
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Auto-Biography<span class="label label-rouded label-themecolor pull-right">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="add-update.php">Add update</a></li>
-                                <li><a href="list-posts.php">List updates</a></li>
+                                <li><a href="list-updates.php">List updates</a></li>
                             </ul>
                         </li>
 

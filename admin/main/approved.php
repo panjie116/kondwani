@@ -4,7 +4,29 @@ include '../includes/conn.php';
 session_start();
 if (!isset($_SESSION['username'])) {
     header('location:../index.php');
-} else {
+} else{
+if( $_GET['disid'])
+{
+    $id=intval($_GET['disid']);
+    $query=mysqli_query($con,"update tblcomments set status='0' where id='$id'");
+    $msg="Comment unapproved";
+}
+// Code for restore
+if($_GET['appid'])
+{
+    $id=intval($_GET['appid']);
+    $query=mysqli_query($con,"update tblcomments set status='1' where id='$id'");
+    $msg="Comment approved";
+}
+
+// Code for deletion
+if($_GET['action']=='del' && $_GET['rid'])
+{
+    $id=intval($_GET['rid']);
+    $query=mysqli_query($con,"delete from  tblcomments  where id='$id'");
+    $delmsg="Comment deleted forever";
+}
+
 
 
 
@@ -71,13 +93,10 @@ if (!isset($_SESSION['username'])) {
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="index.php">
                         <!-- Logo icon --><b>
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
-                            <img src="../assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                            <!-- Light Logo icon -->
-                            <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                           <i class="wi wi-sunset"></i>      
+                           
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text --><span>
@@ -207,7 +226,7 @@ if (!isset($_SESSION['username'])) {
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Auto-Biography<span class="label label-rouded label-themecolor pull-right">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="add-update.php">Add update</a></li>
-                                <li><a href="list-posts.php">List updates</a></li>
+                                <li><a href="list-updates.php">List updates</a></li>
                             </ul>
                         </li>
 
