@@ -32,7 +32,7 @@ if (!isset($_SESSION['username'])) {
             $status = 1;
             $query = mysqli_query($con, "insert into tblads(Title,Link,PostUrl,Is_Active,PostImage) values('$title','$link','$url','$status','$imgnewfile')");
             if ($query) {
-                $msg = "Ad successfully added ";
+                $msg = "Advertisement  successfully added ";
             } else {
                 $error = "Something went wrong . Please try again.";
             }
@@ -88,7 +88,7 @@ if (!isset($_SESSION['username'])) {
     <div class="preloader">
         <div class="loader">
             <div class="loader__figure"></div>
-            <p class="loader__label">Kho</p>
+            <p class="loader__label">panjie.dev</p>
         </div>
     </div>
     <!-- ============================================================== -->
@@ -280,7 +280,7 @@ if (!isset($_SESSION['username'])) {
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor"> Add Add</h3>
+                        <h3 class="text-themecolor"> Add Advertisement</h3>
                     </div>
                    
                     

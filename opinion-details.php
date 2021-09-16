@@ -353,6 +353,10 @@ if (isset($_POST['submit'])) {
         <script src="js/mail-script.js"></script>
         <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
         <script src="vendors/counter-up/jquery.counterup.min.js"></script>
+        <script src="js/resubmit.js"></script>
         <script src="js/theme.js"></script>
     </body>
+
+
+
 </html>
