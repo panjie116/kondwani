@@ -1,6 +1,7 @@
-<?php
 
-    $to = "email@gmail.com";
+<?php
+if(isset($_POST['submit'])) {
+  $to = "email@gmail.com";
     $from = $_REQUEST['email'];
     $name = $_REQUEST['name'];
     $subject = $_REQUEST['subject'];
@@ -33,5 +34,15 @@
 	$body .= "</body></html>";
 
     $send = mail($to, $subject, $body, $headers);
+} else {
+   echo "<script>alert('Something went wrong. Please try again.');</script>";
+
+    echo " <script type='text/javascript'>
+                                        window.location='index.php#contact';
+           </script>";
+}
+
+
+   
 
 ?>

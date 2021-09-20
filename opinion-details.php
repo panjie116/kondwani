@@ -50,6 +50,10 @@ if (isset($_POST['submit'])) {
         unset($_SESSION['token']);
       else :
         echo "<script>alert('Something went wrong. Please try again.');</script>";
+        
+         echo " <script type='text/javascript'>
+                                        window.location='opinion-details.php#comments';
+           </script>";
 
       endif;
     }
@@ -161,7 +165,7 @@ if (isset($_POST['submit'])) {
                             </div>
 
                         </div>
-                        <div class="comments-area">
+                        <div id="comments" class="comments-area">
                             <h4>Comments</h4>
                             <div class="comment-list">
                                 <div class="single-comment justify-content-between d-flex">

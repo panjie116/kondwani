@@ -12,7 +12,7 @@ include 'admin/includes/conn.php'
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1 , maximum-scale-1, user-scalable=no">
         <link rel="icon" href="img/favicon.png" type="image/png">
         <title>Portfolio</title>
         <!-- Bootstrap CSS -->
@@ -181,70 +181,23 @@ include 'admin/includes/conn.php'
         <!--================Feature Area =================-->
         <section class="feature_area p_120" id="autobiography">
         	<div class="container">
-					<div class="main_title">
-						<h2>Auto-biography</h2>
-					</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-2 col-md-12 col-lg-6">
-				         <div class="timeline-centered">
-				         		<?php
-				        			  $query = mysqli_query($con, "select * FROM tblupdates where tblupdates.Is_Active=1 LIMIT 4 ");
-
-				        			  	while ($row=mysqli_fetch_array($query)) {
-				        			  		
-				        			 
-				        			  ?> 
-
-
-								<div class="">
-									<ul class="unordered-list">
-										<li><a href="bio-details.php?bid=<?php echo htmlentities($row['id']) ?>"> <?php  echo $row['PostTitle']; ?></a>
-											  <h4> <?php echo $row['PostingDate'] ?></h4>
-					                  	<p><?php echo $row['PostDetails'] ?></p>
-
-										</li>
-										
-									</ul>
-								</div>
-					         
-					         	<?php } ?>
-
-					        
-
-					         <article class="timeline-entry begin animate-box" data-animate-effect="fadeInBottom">
-					            <div class="timeline-entry-inner">
-					               <div class="timeline-icon color-none">
-					               </div>
-					            </div>
-					         </article>
-					      </div>
-					   </div>
-					    </div>
-				</div>
-        </section>
-        <!--================End Feature Area =================-->
-        
-      
-        <!--================Testimonials Area =================-->
-        <section class="testimonials_area p_120" id="ads">
-        	<div class="container">
         		<div class="main_title">
-        			<h2>Advertisments</h2>
+        			<h2>Auto-biography</h2>
         		</div>
         		<div class="testi_inner">
 					<div class="testi_slider owl-carousel">
 								<?php
-				        			  $query = mysqli_query($con, "select * FROM tblads where tblads.Is_Active=1 LIMIT 4 ");
+				        			   $query = mysqli_query($con, "select * FROM tblupdates where tblupdates.Is_Active=1 LIMIT 4 ");
 
 				        			  	while ($row=mysqli_fetch_array($query)) {
 				        			  		
+				        			 
 				        			 
 				        			  ?> 
 						<div class="item">
 							<div  class="testi_item">
 								<div id= "link_other" >
-								 <a target="blank" href="https://www.<?php echo htmlentities($row['Link']) ?>"><img src="admin/postimages/<?php echo htmlentities($row['PostImage']); ?>" alt="<?php echo htmlentities($row['PostImage']);  ?>" width="230" height="180"></a>
+								 <a  href="bio-details.php?bid=<?php echo htmlentities($row['id']) ?>"> <img src="admin/postimages/<?php echo htmlentities($row['PostImage']); ?>" alt="<?php echo htmlentities($row['PostImage']);  ?>" width="230" height="200"></a>
 								
 							</div>
 							</div>
@@ -255,7 +208,9 @@ include 'admin/includes/conn.php'
         		</div>
         	</div>
         </section>
-        <!--================End Testimonials Area =================-->
+        <!--================End Feature Area =================-->
+        
+      
 
 
          <!--================Contact Area =================-->
@@ -393,5 +348,7 @@ include 'admin/includes/conn.php'
 				}
 
 				  </script>
+
+				 
     </body>
 </html>
