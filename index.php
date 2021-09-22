@@ -177,7 +177,7 @@ include 'admin/includes/conn.php'
         	</div>
         	<div class="button-group-area mt-40 view-more">
 						
-				<a style="width: 50%;" href="#" class="genric-btn success circle">Read More!</a>
+				<a style="width: 50%;" href="blog.php" class="genric-btn success circle">Read More!</a>
 						
 			</div>
 
