@@ -307,7 +307,7 @@ if($_GET['action']=='del' && $_GET['rid'])
                                         <tr>
                                             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">#</th>
                                             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Name</th>
-                                            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Email</th>
+                                            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">Email</th>
                                             <th scope="col" data-tablesaw-sortable-col  data-tablesaw-priority="3" width="300">Comment</th>
                                             <th scope="col" data-tablesaw-sortable-col  data-tablesaw-priority="3">Status</th>
                                             <th scope="col" data-tablesaw-sortable-col  data-tablesaw-priority="3">News</th>

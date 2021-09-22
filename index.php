@@ -54,9 +54,8 @@ include 'admin/includes/conn.php'
 								<li class="nav-item"><a class="nav-link" href="#about">About</a></li> 
 								<li class="nav-item"><a class="nav-link" href="#opinion">Opinion</a></li> 
 								<li class="nav-item"><a class="nav-link" href="#autobiography">Auto-Biography</a>
-								<li class="nav-item"><a class="nav-link" href="#ads">Ads</a>
 								<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-								<li class="nav-item"><a class="nav-link" href="admin/index.php">Admin</a>
+								<li class="nav-item"><a class="nav-link" target="blank" href="admin/index.php">Admin</a>
 							</ul>
 						</div> 
 					</div>
@@ -152,16 +151,21 @@ include 'admin/includes/conn.php'
         			  ?>
         			<div class="col-lg-3">
         				<div class="l_blog_item">
-        					<div class="l_blog_img">
-        						 <a href="opinion-details.php?nid=<?php echo htmlentities($row['id']) ?>"><img src="admin/postimages/<?php echo htmlentities($row['PostImage']); ?>" alt="<?php echo htmlentities($row['PostImage']);  ?>" width="230" height="180"></a>
-        					</div>
+        					
         					<div class="l_blog_text">
-        						<div class="date">
-        							<a href=>  <?php  echo $row['PostingDate']; ?>  |  By Kondwani</a>
-        						</div>
+        						
         						<a href="opinion-details.php?nid=<?php echo htmlentities($row['id']) ?>"><h4> <?php  echo $row['PostTitle']; ?> </h4></a>
         						
         					</div>
+        					<div class="date">
+        							  <a href="#"><i class="fa fa-user"></i> Kondwani</a>   <span><i class="fa fa-calendar"></i> <?php  echo $row['PostingDate']; ?> </a>  
+        						</div>
+
+        					<div class="l_blog_img">
+        						 <a href="opinion-details.php?nid=<?php echo htmlentities($row['id']) ?>"><img src="admin/postimages/<?php echo htmlentities($row['PostImage']); ?>" alt="<?php echo htmlentities($row['PostImage']);  ?>" width="230" height="180"></a>
+        					</div>
+
+        					<hr>
         				</div>
         			</div>
 
@@ -171,6 +175,13 @@ include 'admin/includes/conn.php'
         			
         	
         	</div>
+        	<div class="button-group-area mt-40 view-more">
+						
+				<a style="width: 50%;" href="#" class="genric-btn success circle">Read More!</a>
+						
+			</div>
+
+
 
         	
 
