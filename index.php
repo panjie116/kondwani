@@ -13,7 +13,7 @@ include 'admin/includes/conn.php'
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1 , maximum-scale-1, user-scalable=no">
-        <link rel="icon" href="img/favicon.png" type="image/png">
+        <link rel="icon" href="img/logo.png"  type="image/png">
         <title>Portfolio</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.css">
@@ -41,7 +41,7 @@ include 'admin/includes/conn.php'
             	<nav class="navbar navbar-expand-lg navbar-light">
 					<div class="container box_1620">
 						<!-- Brand and toggle get grouped for better mobile display -->
-						<a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>
+						<a class="navbar-brand logo_h" href="index.php"><img style="width:30px;" src="img/logo.png" alt=""></a>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
@@ -154,7 +154,7 @@ include 'admin/includes/conn.php'
         					
         					<div class="l_blog_text">
         						
-        						<a href="opinion-details.php?nid=<?php echo htmlentities($row['id']) ?>"><h4> <?php  echo $row['PostTitle']; ?> </h4></a>
+        						<a href="opinion-details.php?nid=<?php echo htmlentities($row['id'])?>&cid=<?php echo $row["CategoryId"] ?>"><h4> <?php  echo $row['PostTitle']; ?> </h4></a>
         						
         					</div>
         					<div class="date">
@@ -162,7 +162,7 @@ include 'admin/includes/conn.php'
         						</div>
 
         					<div class="l_blog_img">
-        						 <a href="opinion-details.php?nid=<?php echo htmlentities($row['id']) ?>"><img src="admin/postimages/<?php echo htmlentities($row['PostImage']); ?>" alt="<?php echo htmlentities($row['PostImage']);  ?>" width="230" height="180"></a>
+        						 <a href="opinion-details.php?nid=<?php echo htmlentities($row['id']) ?>&cid=<?php echo $row["CategoryId"] ?>"><img src="admin/postimages/<?php echo htmlentities($row['PostImage']); ?>" alt="<?php echo htmlentities($row['PostImage']);  ?>"  width="275" height="250"></a>
         					</div>
 
         					<hr>

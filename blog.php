@@ -10,7 +10,7 @@ include('admin/includes/conn.php');
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" href="img/favicon.png" type="image/png">
+        <link rel="icon" href="img/logo.png" type="image/png">
         <title>Portfolio</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.css">
@@ -32,7 +32,7 @@ include('admin/includes/conn.php');
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <div class="container box_1620">
                         <!-- Brand and toggle get grouped for better mobile display -->
-                        <a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>
+                        <a class="navbar-brand logo_h" href="index.php"><img style="width:30px;" src="img/logo.png" alt=""></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -101,7 +101,7 @@ include('admin/includes/conn.php');
                                </div>
                                 <div class="col-md-9">
                                     <div class="blog_post">
-                                         <a href="opinion-details.php?nid=<?php echo htmlentities($row['id']) ?>"> <img src="admin/postimages/<?php echo htmlentities($row['PostImage']); ?>" width="400" height="300" alt="<?php echo htmlentities($row['PostImage']);  ?>"> </a>
+                                         <a href="opinion-details.php?nid=<?php echo htmlentities($row['id']) ?>"> <img src="admin/postimages/<?php echo htmlentities($row['PostImage']); ?>" width="350" height="250" alt="<?php echo htmlentities($row['PostImage']);  ?>"> </a>
                                         <div class="blog_details">
                                             <a href="opinion-details.php?nid=<?php echo htmlentities($row['id']) ?>"><h4> <?php  echo $row['PostTitle']; ?> </h4></a>
                                             <a href="opinion-details.php?nid=<?php echo htmlentities($row['id']) ?>" class="blog_btn">Read</a>
