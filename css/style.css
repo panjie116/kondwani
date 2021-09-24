@@ -1152,6 +1152,9 @@ button:focus {
 /* End Reservation Form Area css
 ============================================================================================ */
 /*============== contact_area css ================*/
+.contact_area{
+ background-color:#f9f9ff ;
+}
 .mapBox {
   height: 70px;
   margin-bottom: 20px; }

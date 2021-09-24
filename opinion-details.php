@@ -135,7 +135,7 @@ if (isset($_POST['submit'])) {
                         <div class="single-post row">
                             <div class="col-lg-12">
 
- <?php
+            <?php
                       if(isset($_GET['nid'])){
                                        
                   $pid=intval($_GET['nid']);
@@ -144,15 +144,15 @@ if (isset($_POST['submit'])) {
                   while ($row=mysqli_fetch_array($query)) {
                   ?>
                                 
-                                <div class="row">
+                                <div class="row ">
                                       <h2> <?php echo $row['PostTitle']; ?> </h2>
                                     
 
 
                                     <div class="col-lg-12 mt-25">
-                                        <div class="col-6">
+                                        <div class="l_blog_img">
                                                
-                                                 <img class="img-fluid" src="admin/postimages/<?php echo htmlentities($row['PostImage']);?>" alt="">
+                                                 <img  width="600" height="550" class="img-fluid" src="admin/postimages/<?php echo htmlentities($row['PostImage']);?>"  alt="">
                                          </div>  
                                         <p>
                                            <?php echo $row['PostDetails']; ?> 
